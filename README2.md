@@ -10,3 +10,5 @@
 			react github官网可找到 create-react-app脚手架安装
 
 	### branch & tag
+
+		t0.2.0 项目构建及 2章 react基础完成
