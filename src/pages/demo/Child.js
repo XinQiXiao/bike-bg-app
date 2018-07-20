@@ -3,6 +3,8 @@
  */
 import React, { Component, /*PureComponent*/ } from 'react'
 
+import './index.less'
+
 class ChildComponent extends Component{
 	componentWillMount(){
 		console.log('Child willMount')
@@ -33,7 +35,7 @@ class ChildComponent extends Component{
 		const { name = '' } = this.props
 		console.log('Child render props=>', this.props)
 		return (
-			<div sytle={{padding: 30}}>
+			<div className="child-content">
 				<p>child 组件 name: {name}</p>
 			</div>
 		)
