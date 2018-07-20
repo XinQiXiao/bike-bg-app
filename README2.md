@@ -14,7 +14,15 @@
 		t0.2.0 项目构建及 2章 react基础完成
 
 		t0.3.1 基础插件安装
+			（参考慕课网章节 3-1基础插件安装1）
 			1.安装 react-router-dom axios less loader
 				yarn add react-router-dom axios less-loader
 
 			2.暴露配置，修改webpack, 使用less
+				在项目已经提交完成的情况下 执行 yarn eject 命令 选择 yes
+
+			3.less 文件加载
+				1).修改 config.dev 复制 css module 部分改为 less 细节请参照代码
+				2).重新执行 yarn start 
+					遇到问题，(1).babel-loader not found , 使用yarn 重新加载 babel-loader
+									(2).less not found, yarn add less
