@@ -1,8 +1,11 @@
 
 // demo
-import { LifeComponent } from './demo'
+import { LifeComponent, GridComponent } from './demo'
+import Admin from './Admin'
 
 export {
 	// demo
-	LifeComponent
+	LifeComponent, GridComponent,
+	// admin
+	Admin,
 }

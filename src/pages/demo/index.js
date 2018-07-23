@@ -1,5 +1,15 @@
-import LifeComponent from './Life'
+/**
+ * create at 07/23/18
+ */
+
+// component life
+import { LifeComponent } from './componentLife'
+
+// Grid 
+import { GridComponent } from './grid'
 
 export {
-	LifeComponent
+	LifeComponent,
+	// grid
+	GridComponent
 }
