@@ -21,7 +21,6 @@ class AdminComponent extends Component{
 					<Header/>
 					<Row className="content">
 						content
-						{this.props.children}
 					</Row>
 					<Footer/>
 				</Col>
