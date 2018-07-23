@@ -63,3 +63,10 @@
 
 		t0.3.6 菜单组件开发2
 			1.遍历 menuConfig 渲染 MenuList
+
+		t0.3.7 头部组件的实现1
+			1.header UI 布局
+			2.实现一些公共基础类(utils ) 获取时间格式
+			3.实现动态获取本地时间
+			4.resource doc（百度天气 api 地址）
+
