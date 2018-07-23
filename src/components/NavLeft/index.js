@@ -24,7 +24,6 @@ class NavLeftComponent extends Component{
 	}
 
 	componentWillMount(){
-		console.log('will mount MenuConfig=>', MenuConfig)
 		const menuTreeNode = this._renderMenu(MenuConfig)
 		this.setState({
 			menuTreeNode
@@ -33,7 +32,6 @@ class NavLeftComponent extends Component{
 
 	_renderMenu = (data)=>{
 		return data.map((item)=>{
-			console.log('_renderMenu item=>', item)
 			if(item.children){
 				return (
 					<SubMenu title={item.title} key={item.key}>
@@ -50,7 +48,6 @@ class NavLeftComponent extends Component{
 	}
 
 	render(){
-		console.log('navLeft state=>', this.state)
 		return (
 			<div >
 				<div className="logo">
