@@ -6,8 +6,8 @@ import React, { Component } from 'react'
 class NavLeftComponent extends Component{
 	render(){
 		return (
-			<div>
-				Header
+			<div >
+				This is NavLeft.
 			</div>
 		)
 	}

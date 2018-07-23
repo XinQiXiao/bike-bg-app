@@ -3,16 +3,13 @@ import React, { Component } from 'react'
 import './App.css'
 
 // components
-import { Admin, LifeComponent, GridComponent } from './pages'
+import { Admin } from './pages'
 
 class App extends Component {
   render() {
     return (
-      <GridComponent />
+      <Admin />
     )
-    // return (
-    //   <Admin />
-    // )
     // return (
     //   <div className="App">
     //     <header className="App-header">
