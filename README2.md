@@ -70,3 +70,10 @@
 			3.实现动态获取本地时间
 			4.resource doc（百度天气 api 地址）
 
+
+		t0.3.8 头部组件的实现2
+			1.jsonp add (yarn add jsonp --save)
+			2.axios 封装 jsop 请求
+			3.引入lodash (yarn add lodash --save)
+			4.引入moment (yarn add moment --save)
+			5.实现显示天气
