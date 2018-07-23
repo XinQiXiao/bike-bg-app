@@ -2,6 +2,7 @@
  * create at 07/20/18
  */
 import React, { Component } from 'react'
+import { Button } from 'antd'
 
 // component
 import ChildComponent from './Child'
@@ -26,6 +27,7 @@ class LifeComponent extends Component{
 		return (
 			<div sytle={{padding: 50}}>
 				<p>React 生命周期介绍</p>
+				<Button onClick={this._btnClick}>antd 点击一下</Button>
 				<button onClick={this._btnClick}>点击一下</button>
 				<p>count: {count}</p>
 				<ChildComponent name="child name"/>

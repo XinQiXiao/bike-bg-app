@@ -26,3 +26,23 @@
 				2).重新执行 yarn start 
 					遇到问题，(1).babel-loader not found , 使用yarn 重新加载 babel-loader
 									(2).less not found, yarn add less
+
+		t0.3.2 基础插件安装2
+			1.安装 antd 
+				yarn add antd
+
+				LifeComponent 引入Button antd样式
+
+			2.使用 babel-plugin-import 实现按需加载
+				改webpack.config配置
+				less 报错
+					https://github.com/ant-design/ant-motion/issues/44
+.bezierEasingMixin();
+				需降级 less 版本到 2.7.3
+
+				yarn add less@^2.7.3未识别 改为 yarn add less@2.7.3
+			
+			3.更换主题 -> @primary-color
+
+			4.可以去npm 官网搜具体插件 查询如何使用
+
