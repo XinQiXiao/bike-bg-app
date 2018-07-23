@@ -61,3 +61,5 @@
 			2.渲染 navLeft logo ;
 			3.引入antd Menu
 
+		t0.3.6 菜单组件开发2
+			1.遍历 menuConfig 渲染 MenuList

@@ -2,7 +2,7 @@
  * create 07/23/18
  */
 import React, { Component } from 'react'
-import { Menu, Icon } from 'antd'
+import { Menu } from 'antd'
 
 // config 
 import { MenuConfig } from '../../config'
@@ -15,7 +15,42 @@ const SubMenu = Menu.SubMenu
 const MenuItem = Menu.Item
 
 class NavLeftComponent extends Component{
+	constructor(props){
+		super(props)
+
+		this.state = {
+			menuTreeNode: []
+		}
+	}
+
+	componentWillMount(){
+		console.log('will mount MenuConfig=>', MenuConfig)
+		const menuTreeNode = this._renderMenu(MenuConfig)
+		this.setState({
+			menuTreeNode
+		})
+	}
+
+	_renderMenu = (data)=>{
+		return data.map((item)=>{
+			console.log('_renderMenu item=>', item)
+			if(item.children){
+				return (
+					<SubMenu title={item.title} key={item.key}>
+						{this._renderMenu(item.children)}
+					</SubMenu>
+				)
+			}
+			return (
+				<MenuItem key={item.key}>
+					{item.title}
+				</MenuItem>
+			)
+		})
+	}
+
 	render(){
+		console.log('navLeft state=>', this.state)
 		return (
 			<div >
 				<div className="logo">
@@ -23,16 +58,7 @@ class NavLeftComponent extends Component{
 					<h1>Imooc MS</h1>
 				</div>
 				<Menu theme="dark">
-					<SubMenu key="sub1" 
-						title={
-							<span><Icon type="mail"/><span>Navigation One</span></span>
-						}
-					>
-						<MenuItem key="1">Option 1</MenuItem>
-						<MenuItem key="2">Option 2</MenuItem>
-						<MenuItem key="3">Option 3</MenuItem>
-						<MenuItem key="4">Option 4</MenuItem>
-					</SubMenu>
+					{this.state.menuTreeNode}
 				</Menu>
 			</div>
 		)
