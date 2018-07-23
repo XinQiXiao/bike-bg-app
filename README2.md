@@ -37,7 +37,7 @@
 				改webpack.config配置
 				less 报错
 					https://github.com/ant-design/ant-motion/issues/44
-.bezierEasingMixin();
+				.bezierEasingMixin();
 				需降级 less 版本到 2.7.3
 
 				yarn add less@^2.7.3未识别 改为 yarn add less@2.7.3
