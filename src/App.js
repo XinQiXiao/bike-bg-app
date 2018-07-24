@@ -3,12 +3,12 @@ import React, { Component } from 'react'
 import './App.css'
 
 // components
-import { HomeRoute } from './pages'
+import { RouterPage } from './pages'
 
 class App extends Component {
   render() {
     return (
-      <HomeRoute />
+      <RouterPage />
     )
     // return (
     //   <div className="App">
