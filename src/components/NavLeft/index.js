@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react'
 import { Menu } from 'antd'
+import { NavLink } from 'react-router-dom'
 
 // config 
 import { MenuConfig } from '../../config'
@@ -41,7 +42,7 @@ class NavLeftComponent extends Component{
 			}
 			return (
 				<MenuItem key={item.key}>
-					{item.title}
+					<NavLink to={item.key}>{item.title}</NavLink>
 				</MenuItem>
 			)
 		})

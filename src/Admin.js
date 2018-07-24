@@ -5,13 +5,10 @@ import React, { Component } from 'react'
 import { Row, Col } from 'antd'
 
 // components
-import { Header, Footer, NavLeft } from '../components'
-
-// page
-import HomePage from './home'
+import { Header, Footer, NavLeft } from './components'
 
 // style
-import '../style/common.less'
+import './style/common.less'
 
 class AdminComponent extends Component{
 	render(){
@@ -23,7 +20,7 @@ class AdminComponent extends Component{
 				<Col span="20" className="main">
 					<Header/>
 					<Row className="content">
-						<HomePage />
+						{this.props.children}
 					</Row>
 					<Footer/>
 				</Col>

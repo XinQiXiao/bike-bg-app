@@ -97,3 +97,9 @@
 		t0.4.4 react-router 4.0 路由demo2 演示
 			1.路由传值, match.prams
 			2.不存在页面，返回404页面
+
+		t0.4.5 react-router 4.0 在项目当中的运用
+			1.项目访问统一router, App 组件包裹多个router;
+			2.Admin 组件render subRouter (content 下 {this.props.children});
+			3.NavLeft 里配置 NavLink
+			4.构建，ui-buttons页面，构建404页面
