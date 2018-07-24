@@ -3,7 +3,6 @@
  */
 import React, { Component } from 'react'
 import { Row, Col } from 'antd'
-import _ from 'lodash'
 
 // style
 import './index.less'

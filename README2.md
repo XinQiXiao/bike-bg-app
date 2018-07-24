@@ -77,3 +77,7 @@
 			3.引入lodash (yarn add lodash --save)
 			4.引入moment (yarn add moment --save)
 			5.实现显示天气
+
+		t0.3.9 底部组件功能实现1
+			1.底部组件布局, 完善footer组件
+			2.home页面实现 UI
