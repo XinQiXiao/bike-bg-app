@@ -5,7 +5,8 @@ import React, { Component } from 'react'
 import { HashRouter as Router, Route } from 'react-router-dom'
 
 // components 
-import { Main, About, Topics } from '../route1'
+import { About, Topics } from '../route1'
+import Main from './Main'
 
 // router config
 import Home from './Home'

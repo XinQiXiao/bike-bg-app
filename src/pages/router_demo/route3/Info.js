@@ -3,14 +3,14 @@
  */
 import React, { Component } from 'react'
 
-class Main extends Component{
+class Info extends Component{
 	render(){
 		return (
 			<div>
-					Main
+				{`动态路由参数 = ${this.props.match.params.value}`}
 			</div>
 		)
 	}
 }
 
-export default Main
+export default Info

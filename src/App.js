@@ -3,12 +3,12 @@ import React, { Component } from 'react'
 import './App.css'
 
 // components
-import { RouterPage } from './pages'
+import { RouterPage3 } from './pages'
 
 class App extends Component {
   render() {
     return (
-      <RouterPage />
+      <RouterPage3 />
     )
     // return (
     //   <div className="App">

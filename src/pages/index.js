@@ -6,7 +6,7 @@ import { LifeComponent, GridComponent } from './demo'
 import Admin from './Admin'
 
 // router demo
-import { HomeRoute, RouterPage } from './router_demo'
+import { HomeRoute, RouterPage, RouterPage3 } from './router_demo'
 
 export {
 	// demo
@@ -16,4 +16,5 @@ export {
 	// router demo
 	HomeRoute,
 	RouterPage,
+	RouterPage3,
 }

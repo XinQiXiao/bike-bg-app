@@ -3,14 +3,14 @@
  */
 import React, { Component } from 'react'
 
-class Main extends Component{
+class NoMatch extends Component{
 	render(){
 		return (
 			<div>
-					Main
+				404 no page.
 			</div>
 		)
 	}
 }
 
-export default Main
+export default NoMatch
