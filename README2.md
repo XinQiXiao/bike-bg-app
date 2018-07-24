@@ -104,6 +104,11 @@
 			3.NavLeft 里配置 NavLink
 			4.构建，ui-buttons页面，构建404页面
 
-		t0.5.1
+		t0.5.1 Button按钮使用讲解1
 			1.antd buttons 组件使用, 引入 Card, Button组件
-			
+			2.基础按钮、图形按钮、loading按钮
+
+		t0.5.2 Button按钮使用讲解2
+			1.按钮组、按钮大小 size属性
+			2.引入radio
+			3.设置 页面 ”main“ 部分自动滚动 (overflow: auto)
