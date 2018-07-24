@@ -85,3 +85,7 @@
 		t0.3.10 底部组件功能实现2
 			1.home UI 布局
 			2.css 实现箭头图标
+
+		t0.4.2 react-router 4.0路由demo 演示1
+			1.混合路由组件化
+			2. switch 和 exact区别
