@@ -9,7 +9,10 @@ import App from './App'
 import Admin from './Admin'
 
 // router
-import { Login, ButtonPage, NoMatchPage } from './pages'
+import { 
+	Login, NoMatchPage,
+	ButtonPage, ModalPage,
+} from './pages'
 
 class IRouter extends Component{
 	render(){
@@ -21,6 +24,7 @@ class IRouter extends Component{
 						<Admin>
 							<Switch>
 								<Route path="/admin/ui/buttons" component={ButtonPage} />
+								<Route path="/admin/ui/modals" component={ModalPage} />
 								<Route component={NoMatchPage} />
 							</Switch>
 						</Admin>

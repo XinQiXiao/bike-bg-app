@@ -9,7 +9,7 @@ import { HomeRoute, RouterPage, RouterPage3 } from './router_demo'
 import Login from './login'
 
 // ui 
-import { ButtonPage } from './ui'
+import { ButtonPage, ModalPage, } from './ui'
 
 // 404
 import NoMatchPage from './nomatch'
@@ -25,6 +25,7 @@ export {
 	Login,
 	// ui
 	ButtonPage,
+	ModalPage,
 	// 404
 	NoMatchPage,
 }
