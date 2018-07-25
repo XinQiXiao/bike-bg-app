@@ -6,6 +6,7 @@ import ModalPage from './modals'
 import LoadingPage from './loadings'
 import NotificationPage from './notification'
 import MessagePage from './message'
+import TabsPage from './tabs'
 
 export {
 	ButtonPage,
@@ -13,4 +14,5 @@ export {
 	LoadingPage,
 	NotificationPage,
 	MessagePage,
+	TabsPage,
 }

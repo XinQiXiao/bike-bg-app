@@ -12,7 +12,7 @@ import Admin from './Admin'
 import { 
 	Login, NoMatchPage,
 	// UI
-	ButtonPage, ModalPage, LoadingPage, NotificationPage, MessagePage,
+	ButtonPage, ModalPage, LoadingPage, NotificationPage, MessagePage, TabsPage,
 } from './pages'
 
 class IRouter extends Component{
@@ -29,6 +29,7 @@ class IRouter extends Component{
 								<Route path="/admin/ui/loadings" component={LoadingPage} />
 								<Route path="/admin/ui/notification" component={NotificationPage} />
 								<Route path="/admin/ui/messages" component={MessagePage} />
+								<Route path="/admin/ui/tabs" component={TabsPage} />
 								<Route component={NoMatchPage} />
 							</Switch>
 						</Admin>
