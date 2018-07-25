@@ -121,3 +121,6 @@
 
 		t0.5.5 Loading组件使用
 			1. Spin 加载中组件
+
+		t0.5.6 Notification组件使用
+			1.通知提醒框

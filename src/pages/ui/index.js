@@ -4,9 +4,11 @@
 import ButtonPage from './buttons'
 import ModalPage from './modals'
 import LoadingPage from './loadings'
+import NotificationPage from './notification'
 
 export {
 	ButtonPage,
 	ModalPage,
 	LoadingPage,
+	NotificationPage,
 }
