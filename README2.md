@@ -113,5 +113,8 @@
 			2.引入radio
 			3.设置 页面 ”main“ 部分自动滚动 (overflow: auto)
 
-		t0.5.4 Modal组件使用讲解1
-			
+		t0.5.3 Modal组件使用讲解1
+
+		t0.5.4 Modal组件使用讲解2
+			1.顶部20px, 是antd api 没有支撑的，需要在 ui.less 中引入resource中 ui.less几个样式,然后在style中做修改(top: 20), 【经测试，只有添加 top: x，起作用】
+			2. Modal.method 应用

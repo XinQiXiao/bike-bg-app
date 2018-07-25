@@ -12,11 +12,6 @@ const Base1 = 'baseModal1'
 const Base2 = 'baseModal2'
 const Base3 = 'baseModal3'
 const Base4 = 'baseModal4'
-const Info1 = 'infoModal1'
-const Info2 = 'infoModal2'
-const Info3 = 'infoModal3'
-const Info4 = 'infoModal4'
-const Info5 = 'infoModal5'
 
 class ModalPage extends Component{
 	state = { 
@@ -24,11 +19,6 @@ class ModalPage extends Component{
 		[Base2]: false,
 		[Base3]: false,
 		[Base4]: false,
-		[Info1]: false,
-		[Info2]: false,
-		[Info3]: false,
-		[Info4]: false,
-		[Info5]: false,
 	}
 
 	_handleModal = (type) => {
@@ -47,8 +37,23 @@ class ModalPage extends Component{
 		})
 	}
 
+	_modalConfirm = (type)=>{
+		Modal[type]({
+			title: '确认',
+			content: `${type} content`,
+			onOk(){
+				console.log('modal confirm ok.')
+			},
+			onCancel(){
+				console.log('modal confirm cancel')
+			}
+		})
+	}
+
 	render(){
-		const { baseModal1, baseModal2 } = this.state
+		const { 
+			baseModal1, baseModal2, baseModal3, baseModal4,
+		} = this.state
 		return (
 			<div>
 				<Card title="基础模态框" className="card-wrap">
@@ -58,11 +63,11 @@ class ModalPage extends Component{
 					<Button type="primary" onClick={()=> this._handleModal(Base4)}>水平垂直居中</Button>
 				</Card>
 				<Card title="信息确认框" className="card-wrap">
-					<Button type="primary" onClick={()=> this._handleModal(Info1)}>Confirm</Button>
-					<Button type="primary" onClick={()=> this._handleModal(Info2)}>Info</Button>
-					<Button type="primary" onClick={()=> this._handleModal(Info3)}>Success</Button>
-					<Button type="primary" onClick={()=> this._handleModal(Info4)}>Error</Button>
-					<Button type="primary" onClick={()=> this._handleModal(Info5)}>Warning</Button>
+					<Button type="primary" onClick={()=> this._modalConfirm('confirm')}>Confirm</Button>
+					<Button type="primary" onClick={()=> this._modalConfirm('info')}>Info</Button>
+					<Button type="primary" onClick={()=> this._modalConfirm('success')}>Success</Button>
+					<Button type="primary" onClick={()=> this._modalConfirm('error')}>Error</Button>
+					<Button type="primary" onClick={()=> this._modalConfirm('warning')}>Warning</Button>
 				</Card>
 				<Modal 
 					title="Basic open"
@@ -77,8 +82,28 @@ class ModalPage extends Component{
 					visible={baseModal2}
 					onOk={()=> this._handleModalOk(Base2)}
 					onCancel={()=> this._handleModalCancel(Base2)}
+					okText="确认"
+					cancelText="取消"
 				>
-					<p>Basic 自定义页脚</p>
+					<p>Basic 自定义页脚 content</p>
+				</Modal>
+				<Modal 
+					style={{top: 20}}
+					title="Basic 顶部20px弹框"
+					visible={baseModal3}
+					onOk={()=> this._handleModalOk(Base3)}
+					onCancel={()=> this._handleModalCancel(Base3)}
+				>
+					<p>Basic 顶部20px弹框 content</p>
+				</Modal>
+				<Modal 
+					title="Basic 水平垂直居中"
+					visible={baseModal4}
+					wrapClassName="vertical-center-modal"
+					onOk={()=> this._handleModalOk(Base4)}
+					onCancel={()=> this._handleModalCancel(Base4)}
+				>
+					<p>Basic 水平垂直居中 content</p>
 				</Modal>
 			</div>
 		)
