@@ -118,3 +118,6 @@
 		t0.5.4 Modal组件使用讲解2
 			1.顶部20px, 是antd api 没有支撑的，需要在 ui.less 中引入resource中 ui.less几个样式,然后在style中做修改(top: 20), 【经测试，只有添加 top: x，起作用】
 			2. Modal.method 应用
+
+		t0.5.5 Loading组件使用
+			1. Spin 加载中组件
