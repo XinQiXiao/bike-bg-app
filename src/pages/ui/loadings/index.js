@@ -7,7 +7,7 @@ import { Card, Spin, Icon, Alert, Switch} from 'antd'
 // style
 import '../ui.less'
 
-class ModalPage extends Component{
+class LoadingPage extends Component{
 	state = {
 		alertLoading: false
 	}
@@ -56,4 +56,4 @@ class ModalPage extends Component{
 	}
 }
 
-export default ModalPage
+export default LoadingPage

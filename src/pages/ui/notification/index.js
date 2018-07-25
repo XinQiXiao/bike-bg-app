@@ -7,7 +7,7 @@ import { Card, Button, notification} from 'antd'
 // style
 import '../ui.less'
 
-class ModalPage extends Component{
+class NotificationPage extends Component{
 
 	_openNotification = ({type = 'info', placement = 'topRight'} = {} )=>{
 		notification[type]({
@@ -37,4 +37,4 @@ class ModalPage extends Component{
 	}
 }
 
-export default ModalPage
+export default NotificationPage
