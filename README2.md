@@ -127,4 +127,7 @@
 
 		t0.5.7 Message 组件使用
 
-		t0.5.8 Tabs 组件使用1
+		t0.5.8 Tabs 组件使用
+
+		t0.5.10 制作Gallery图片画廊
+			1.导入 resource 中的图片到 public

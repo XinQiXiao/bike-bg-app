@@ -7,6 +7,7 @@ import LoadingPage from './loadings'
 import NotificationPage from './notification'
 import MessagePage from './message'
 import TabsPage from './tabs'
+import GallaryPage from './gallery' 
 
 export {
 	ButtonPage,
@@ -15,4 +16,5 @@ export {
 	NotificationPage,
 	MessagePage,
 	TabsPage,
+	GallaryPage,
 }
