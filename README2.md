@@ -141,4 +141,4 @@
 			1.通过 modal 制作 弹出效果
 
 		t0.5.12 Carousel轮播
-			1.导入 public carousel img
+			1.导入 public carousel img.
