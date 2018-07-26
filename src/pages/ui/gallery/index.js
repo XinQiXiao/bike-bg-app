@@ -2,7 +2,7 @@
  * create at 07/26/18
  */
 import React, { Component } from 'react'
-import { Card, Row, Col,} from 'antd'
+import { Card, Row, Col, Modal} from 'antd'
 
 // style
 import '../ui.less'
@@ -11,6 +11,10 @@ import '../ui.less'
 const { Meta } = Card
 
 class GallaryPage extends Component{
+	state = {
+		currentImg: '',
+		modalShow: false
+	}
 
 	_initImgs(){
 		let images = []
@@ -24,40 +28,53 @@ class GallaryPage extends Component{
 		return images
 	}
 
+	_cardClick = (cardPath)=>{
+		this.setState({
+			currentImg: '/gallery/'+cardPath,
+			modalShow: true,
+		})
+	}
+
 	render(){
 		const imgs = this._initImgs()
 		const imgsList = imgs.map((row) => row.map((item) => 
-			<Card cover={<img src={'/gallery/'+item} />}>
+			<Card 
+				style={{marginBottom: 10}} 
+				cover={<img src={'/gallery/'+item} alt="画廊图片"/>}
+				onClick={()=> this._cardClick(item)}
+			>
 				<Meta title="example" description={`icon path /gallery/${item}`}/>
 			</Card>
 		))
 		return (
 			<div className="card-wrap">
-				<Row >
+				<Row gutter={10}>
 					<Col md={5}>
 						{imgsList[0]}
 					</Col>
-				</Row>
-				<Row >
 					<Col md={5}>
 						{imgsList[1]}
 					</Col>
-				</Row>
-				<Row >
 					<Col md={5}>
 						{imgsList[2]}
 					</Col>
-				</Row>
-				<Row >
 					<Col md={5}>
 						{imgsList[3]}
 					</Col>
-				</Row>
-				<Row >
-					<Col md={5}>
+					<Col md={4}>
 						{imgsList[4]}
 					</Col>
 				</Row>
+				<Modal
+					title="图片画廊"
+					visible={this.state.modalShow}
+					onCancel={()=> {this.setState({modalShow: false})}}
+					footer={null}
+				>
+					<img src={this.state.currentImg} alt="大图"
+						style={{width: '100%', height: '90%'}}
+					/>
+				</Modal>
 			</div>
 		)
 	}
