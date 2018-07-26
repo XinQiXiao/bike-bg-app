@@ -131,3 +131,4 @@
 
 		t0.5.10 制作Gallery图片画廊
 			1.导入 resource 中的图片到 public
+			2.Card Meta 应用

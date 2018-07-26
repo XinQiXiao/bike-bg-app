@@ -7,6 +7,9 @@ import { Card, Row, Col,} from 'antd'
 // style
 import '../ui.less'
 
+// const 
+const { Meta } = Card
+
 class GallaryPage extends Component{
 
 	_initImgs(){
@@ -24,14 +27,37 @@ class GallaryPage extends Component{
 	render(){
 		const imgs = this._initImgs()
 		const imgsList = imgs.map((row) => row.map((item) => 
-			<Card>
+			<Card cover={<img src={'/gallery/'+item} />}>
+				<Meta title="example" description={`icon path /gallery/${item}`}/>
 			</Card>
 		))
 		return (
-			<div>
-				<Card title="图片画廊" className="card-wrap">
-					
-				</Card>
+			<div className="card-wrap">
+				<Row >
+					<Col md={5}>
+						{imgsList[0]}
+					</Col>
+				</Row>
+				<Row >
+					<Col md={5}>
+						{imgsList[1]}
+					</Col>
+				</Row>
+				<Row >
+					<Col md={5}>
+						{imgsList[2]}
+					</Col>
+				</Row>
+				<Row >
+					<Col md={5}>
+						{imgsList[3]}
+					</Col>
+				</Row>
+				<Row >
+					<Col md={5}>
+						{imgsList[4]}
+					</Col>
+				</Row>
 			</div>
 		)
 	}
