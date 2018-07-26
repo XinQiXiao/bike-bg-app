@@ -8,6 +8,7 @@ import NotificationPage from './notification'
 import MessagePage from './message'
 import TabsPage from './tabs'
 import GallaryPage from './gallery' 
+import CarouselPage from './carousel'
 
 export {
 	ButtonPage,
@@ -17,4 +18,5 @@ export {
 	MessagePage,
 	TabsPage,
 	GallaryPage,
+	CarouselPage,
 }

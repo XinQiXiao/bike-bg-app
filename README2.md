@@ -11,8 +11,10 @@
 
 	### branch & tag
 
+		##
 		t0.2.0 项目构建及 2章 react基础完成
 
+		##
 		t0.3.1 基础插件安装
 			（参考慕课网章节 3-1基础插件安装1）
 			1.安装 react-router-dom axios less loader
@@ -86,6 +88,7 @@
 			1.home UI 布局
 			2.css 实现箭头图标
 
+		##
 		t0.4.2 react-router 4.0路由demo 演示1
 			1.混合路由组件化
 			2. switch 和 exact区别
@@ -104,6 +107,7 @@
 			3.NavLeft 里配置 NavLink
 			4.构建，ui-buttons页面，构建404页面
 
+		##
 		t0.5.1 Button按钮使用讲解1
 			1.antd buttons 组件使用, 引入 Card, Button组件
 			2.基础按钮、图形按钮、loading按钮
@@ -132,3 +136,9 @@
 		t0.5.10 制作Gallery图片画廊1
 			1.导入 resource 中的图片到 public
 			2.Card Meta 应用
+
+		t0.5.11 制作Gallery图片画廊2
+			1.通过 modal 制作 弹出效果
+
+		t0.5.12 Carousel轮播
+			1.导入 public carousel img

@@ -10,7 +10,8 @@ import Login from './login'
 
 // ui 
 import { 
-	ButtonPage, ModalPage, LoadingPage, NotificationPage, MessagePage, TabsPage, GallaryPage,
+	ButtonPage, ModalPage, LoadingPage, NotificationPage, MessagePage, 
+	TabsPage, GallaryPage, CarouselPage,
 } from './ui'
 
 // 404
@@ -33,6 +34,7 @@ export {
 	MessagePage,
 	TabsPage,
 	GallaryPage,
+	CarouselPage,
 	// 404
 	NoMatchPage,
 }
