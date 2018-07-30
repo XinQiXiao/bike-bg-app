@@ -14,6 +14,9 @@ import {
 	TabsPage, GallaryPage, CarouselPage,
 } from './ui'
 
+// form
+import { FormLogin } from './form'
+
 // 404
 import NoMatchPage from './nomatch'
 
@@ -35,6 +38,8 @@ export {
 	TabsPage,
 	GallaryPage,
 	CarouselPage,
+	// form
+	FormLogin,
 	// 404
 	NoMatchPage,
 }

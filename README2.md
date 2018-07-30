@@ -142,3 +142,7 @@
 
 		t0.5.12 Carousel轮播
 			1.导入 public carousel img.
+
+		##
+		t0.6.1 登录表单组件1
+			1.form 表单使用

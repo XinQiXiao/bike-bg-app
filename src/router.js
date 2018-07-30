@@ -14,6 +14,8 @@ import {
 	// UI
 	ButtonPage, ModalPage, LoadingPage, NotificationPage, MessagePage, 
 	TabsPage, GallaryPage, CarouselPage,
+	// Form
+	FormLogin,
 } from './pages'
 
 class IRouter extends Component{
@@ -25,6 +27,7 @@ class IRouter extends Component{
 					<Route path="/admin" render={() => 
 						<Admin>
 							<Switch>
+								{/* UI */}
 								<Route path="/admin/ui/buttons" component={ButtonPage} />
 								<Route path="/admin/ui/modals" component={ModalPage} />
 								<Route path="/admin/ui/loadings" component={LoadingPage} />
@@ -33,6 +36,8 @@ class IRouter extends Component{
 								<Route path="/admin/ui/tabs" component={TabsPage} />
 								<Route path="/admin/ui/gallery" component={GallaryPage} />
 								<Route path="/admin/ui/carousel" component={CarouselPage} />
+								{/* Form */}
+								<Route path="/admin/form/login" component={FormLogin} />
 								<Route component={NoMatchPage} />
 							</Switch>
 						</Admin>
