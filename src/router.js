@@ -15,7 +15,7 @@ import {
 	ButtonPage, ModalPage, LoadingPage, NotificationPage, MessagePage, 
 	TabsPage, GallaryPage, CarouselPage,
 	// Form
-	FormLogin,
+	FormLogin, FormRegister,
 } from './pages'
 
 class IRouter extends Component{
@@ -38,6 +38,7 @@ class IRouter extends Component{
 								<Route path="/admin/ui/carousel" component={CarouselPage} />
 								{/* Form */}
 								<Route path="/admin/form/login" component={FormLogin} />
+								<Route path="/admin/form/reg" component={FormRegister} />
 								<Route component={NoMatchPage} />
 							</Switch>
 						</Admin>

@@ -3,7 +3,9 @@
  */
 
 import FormLogin from './login'
+import FormRegister from './register'
 
 export {
-	FormLogin
+	FormLogin,
+	FormRegister,
 }

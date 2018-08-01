@@ -15,7 +15,7 @@ import {
 } from './ui'
 
 // form
-import { FormLogin } from './form'
+import { FormLogin, FormRegister, } from './form'
 
 // 404
 import NoMatchPage from './nomatch'
@@ -40,6 +40,7 @@ export {
 	CarouselPage,
 	// form
 	FormLogin,
+	FormRegister,
 	// 404
 	NoMatchPage,
 }
