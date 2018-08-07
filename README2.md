@@ -153,4 +153,9 @@
 
 		t0.6.4 注册表单组件2
 
-		t0.7.1
+		##
+		t0.7.1 表格基础讲解
+			基础表格
+			columns/dataSource/bordered/pagination 属性
+
+		t0.7.2

@@ -17,6 +17,9 @@ import {
 // form
 import { FormLogin, FormRegister, } from './form'
 
+// table
+import { BasicPage } from './table'
+
 // 404
 import NoMatchPage from './nomatch'
 
@@ -41,6 +44,8 @@ export {
 	// form
 	FormLogin,
 	FormRegister,
+	// table
+	BasicPage,
 	// 404
 	NoMatchPage,
 }
