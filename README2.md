@@ -1,6 +1,7 @@
 ####
 	基于react + antd 写的 单车后台管理项目
-
+		项目相关资料补充截图
+			简书“单车后台项目”章节， 提纲url:https://www.jianshu.com/p/98a0fef6aabf
 	### create && init 插件
 
 		1.项目构建
@@ -159,3 +160,15 @@
 			columns/dataSource/bordered/pagination 属性
 
 		t0.7.2
+			数据动态表格
+			1.easy-mock 使用
+				easy-mock 网站：https://www.easy-mock.com/login
+				mock创建接口(截图， 简书url: )
+
+				mock规范 mockjs.com url: https://github.com/nuysoft/Mock/wiki/Getting-Started
+				
+				easy-mock 是基于 mockjs 应用的一个平台
+				使用 easy-mock 创建接口
+
+			2.使用axios 插件
+				请求 easy-mock 建立的 table/list 接口数据
