@@ -159,7 +159,7 @@
 			基础表格
 			columns/dataSource/bordered/pagination 属性
 
-		t0.7.2
+		t0.7.2 表格动态渲染
 			数据动态表格
 			1.easy-mock 使用
 				easy-mock 网站：https://www.easy-mock.com/login
@@ -172,3 +172,9 @@
 
 			2.使用axios 插件
 				请求 easy-mock 建立的 table/list 接口数据
+
+		t0.7.2 表格动态渲染2
+			在 axios 里封装 axios 插件
+			页面调试接口
+
+		t0.7.2 表格动态渲染3

@@ -3,8 +3,10 @@
  */
 import React, { Component } from 'react'
 import { Card, Table } from 'antd'
-import axios from 'axios'
 import _ from 'lodash'
+
+// axios
+import axiosApi from '../../axios'
 
 // const 
 const dataSource = [
@@ -89,24 +91,22 @@ class Page extends Component{
 	}
 
 	// 动态获取 mock 数据
-	_request = ()=> {
-		let baseUrl = ' https://www.easy-mock.com/mock/5b6aeb1ca40bfb27425bbaee/mockapi'
-		axios.get(`${baseUrl}/table/list`).then((res)=>{
-			console.log('_request res=>', res)
-			const {status, data = {}} = res
-			if(status === 200 && data.code === 0){
-				const list = data ? 
-											(data.data ? 
-												(_.isArray(data.data.list) ? data.data.list : []) 
-											: []) 
-										: []
-				this.setState({
-					dataSource2: list
-				})
-			} else {
-				console.log('_request fail=>')
-			}
-		})
+	_request = async ()=> {
+		try{
+			const ret = await axiosApi.ajax({
+				url: '/table/list',
+				data: {
+					parmas: {
+						page: 1
+					}
+				}
+			})
+			this.setState({
+				dataSource2: _.isArray(ret.list) ? ret.list : []
+			})
+		} catch(e){
+			console.log('_request e=>', e)
+		}
 	}
 
 	render(){
@@ -118,6 +118,7 @@ class Page extends Component{
 						columns={columns}
 						dataSource={this.state.dataSource}
 						pagination={false}
+						rowKey={record =>  record.id}
 					/>
 				</Card>
 				<Card title="数据动态渲染表格" style={{marginTop: 10}}>
@@ -126,6 +127,7 @@ class Page extends Component{
 						columns={columns}
 						dataSource={this.state.dataSource2}
 						pagination={false}
+						rowKey={record =>  record.id}
 					/>
 				</Card>
 			</div>
