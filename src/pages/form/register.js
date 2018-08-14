@@ -202,7 +202,7 @@ class FormRegister extends Component{
 									>
 										{
 											this.state.userImg ? 
-											<img src={this.state.userImg}/> : 
+											<img src={this.state.userImg} alt="添加头像"/> : 
 											<Icon type='plus'/>
 										}
 									</Upload>
@@ -216,7 +216,7 @@ class FormRegister extends Component{
 									initialValue: false
 								})(
 									<Checkbox >
-										我已经阅读过<a href="#">注册协议</a>
+										我已经阅读过<a href="javascript:void(0)">注册协议</a>
 									</Checkbox>
 								)
 							}

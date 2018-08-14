@@ -173,8 +173,15 @@
 			2.使用axios 插件
 				请求 easy-mock 建立的 table/list 接口数据
 
-		t0.7.2 表格动态渲染2
+		t0.7.3 表格动态渲染2
 			在 axios 里封装 axios 插件
 			页面调试接口
 
-		t0.7.2 表格动态渲染3
+		t0.7.4 表格动态渲染3
+			1.请求loading封装
+				导入 loading.html public/ index.html 引入 “ajax-loading” class div
+				导入 loaing.less style/ common import 
+			2. columns 中 render 字段使用，
+				sex 1|2 转 男女 ； state ...
+
+		t0.7.5 表格动态渲染3

@@ -54,14 +54,40 @@ const columns = [
 	{
 		title: '性别',
 		dataIndex: 'sex',
+		render(sex){
+			return sex === 1 ? '男' : '女'
+		}
 	},
 	{
 		title: '状态',
 		dataIndex: 'state',
+		render(state){
+			let config = {
+				'1': '咸鱼一枚',
+				'2': '风华浪子',
+				'3': '北大才子一枚',
+				'4': '百度FE',
+				'5': '创业者',
+			}
+			return config[state]
+		}
 	},
 	{
 		title: '爱好',
 		dataIndex: 'interest',
+		render(interest){
+			let config = {
+				'1': '游泳',
+				'2': '打篮球',
+				'3': '踢足球',
+				'4': '跑步',
+				'5': '爬山',
+				'6': '骑行',
+				'7': '桌球',
+				'8': '麦霸',
+			}
+			return config[interest]
+		}
 	},
 	{
 		title: '生日',
@@ -98,7 +124,8 @@ class Page extends Component{
 				data: {
 					parmas: {
 						page: 1
-					}
+					},
+					isShowLoading: true,
 				}
 			})
 			this.setState({
