@@ -2,7 +2,7 @@
  * create at 08/07/18
  */
 import React, { Component } from 'react'
-import { Card, Table, Modal } from 'antd'
+import { Card, Table, Modal, Button, message } from 'antd'
 import _ from 'lodash'
 
 // axios
@@ -107,6 +107,8 @@ class Page extends Component{
 	state = {
 		dataSource: [],
 		dataSource2: [],
+		selectedRowKeys: [],
+		selectedRows: []
 	}
 
 	componentDidMount(){
@@ -129,7 +131,9 @@ class Page extends Component{
 				}
 			})
 			this.setState({
-				dataSource2: _.isArray(ret.list) ? ret.list : []
+				dataSource2: _.isArray(ret.list) ? ret.list : [],
+				selectedRowKeys: [],
+				selectedRows: []
 			})
 		} catch(e){
 			console.log('_request e=>', e)
@@ -148,10 +152,38 @@ class Page extends Component{
 		})
 	}
 
+	_handleDelete = ()=>{
+		const {selectedRows} = this.state 
+		let ids = []
+		selectedRows.forEach((item)=>{
+			ids.push(item.id)
+		})
+		Modal.confirm({
+			title: '删除内容',
+			content: `确定要删除这些数据吗？${ids.join(',')}`,
+			onOk: ()=>{
+				message.success('删除成功')
+				// 重新请求数据
+				this._request()
+			},
+		})
+	}
+
 	render(){
+		const {selectedRowKeys} = this.state
 		const rowSelection = {
 			type: 'radio',
-			selectedRowKeys: this.state.selectedRowKeys
+			selectedRowKeys,
+		}
+		const rowCheckSelection = {
+			type: 'checkbox',
+			selectedRowKeys,
+			onChange: (selectedRowKeys, selectedRows)=>{
+				this.setState({
+					selectedRowKeys,
+					selectedRows,
+				})
+			}
 		}
 		return (
 			<div >
@@ -183,6 +215,19 @@ class Page extends Component{
 								} 
 							}
 						}}
+						bordered
+						columns={columns}
+						dataSource={this.state.dataSource2}
+						pagination={false}
+						rowKey={record =>  record.id}
+					/>
+				</Card>
+				<Card title="Mock-复选" style={{marginTop: 10}}>
+					<div style={{marginBottom: 10}}>
+						<Button type="primary" onClick={this._handleDelete}>删除</Button>
+					</div>
+					<Table 
+						rowSelection={rowCheckSelection}
 						bordered
 						columns={columns}
 						dataSource={this.state.dataSource2}
