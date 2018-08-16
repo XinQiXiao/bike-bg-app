@@ -11,7 +11,7 @@ import './index.less'
 import { utils } from '../../utils'
 
 // axios
-import axios from '../../axios'
+// import axios from '../../axios'
 
 class HeaderComponent extends Component{
 	state = {}
@@ -32,14 +32,19 @@ class HeaderComponent extends Component{
 
 	_getWeatherAPIDate = async ()=>{
 		try{
-			let city = '北京'
-			const ret = await axios.jsonp({
-				url: `http://api.map.baidu.com/telematics/v3/weather?location=${encodeURIComponent(city)}&output=json&ak=3p49MVra6urFRGOT9s8UBWr2`
-			})
-			const data = ret.results[0].weather_data[0]
+			// let city = '北京'
+			// TODO 天气接口有问题 暂时显示静态的
+			// const ret = await axios.jsonp({
+			// 	url: `http://api.map.baidu.com/telematics/v3/weather?location=${encodeURIComponent(city)}&output=json&ak=3p49MVra6urFRGOT9s8UBWr2`
+			// })
+			// const data = ret.results[0].weather_data[0]
+			// this.setState({
+			// 	dayPictureUrl: data.dayPictureUrl,
+			// 	weather: data.weather
+			// })
 			this.setState({
-				dayPictureUrl: data.dayPictureUrl,
-				weather: data.weather
+				dayPictureUrl: '',
+				weather: '多云转晴'
 			})
 		} catch(e){
 			console.log('_getWeatherAPIDate e=>', e)

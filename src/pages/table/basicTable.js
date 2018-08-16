@@ -2,7 +2,7 @@
  * create at 08/07/18
  */
 import React, { Component } from 'react'
-import { Card, Table } from 'antd'
+import { Card, Table, Modal } from 'antd'
 import _ from 'lodash'
 
 // axios
@@ -136,7 +136,23 @@ class Page extends Component{
 		}
 	}
 
+	_onRowClick = (record, index)=>{
+		let selectedKeys = [index]
+		Modal.info({
+			title: '选中的用户信息',
+			content: `用户名：${record.userName}  用户爱好：${record.interest}`
+		})
+		this.setState({
+			selectedRowKeys: selectedKeys,
+			selectedItem: record
+		})
+	}
+
 	render(){
+		const rowSelection = {
+			type: 'radio',
+			selectedRowKeys: this.state.selectedRowKeys
+		}
 		return (
 			<div >
 				<Card title="基础表格">
@@ -148,8 +164,25 @@ class Page extends Component{
 						rowKey={record =>  record.id}
 					/>
 				</Card>
-				<Card title="数据动态渲染表格" style={{marginTop: 10}}>
+				<Card title="数据动态渲染表格-Mock" style={{marginTop: 10}}>
 					<Table 
+						bordered
+						columns={columns}
+						dataSource={this.state.dataSource2}
+						pagination={false}
+						rowKey={record =>  record.id}
+					/>
+				</Card>
+				<Card title="Mock-单选" style={{marginTop: 10}}>
+					<Table 
+						rowSelection={rowSelection}
+						onRow={(record, idx)=>{
+							return {
+								onClick:()=>{
+									this._onRowClick(record, idx)
+								} 
+							}
+						}}
 						bordered
 						columns={columns}
 						dataSource={this.state.dataSource2}

@@ -184,4 +184,12 @@
 			2. columns 中 render 字段使用，
 				sex 1|2 转 男女 ； state ...
 
-		t0.7.5 表格动态渲染3
+		t0.7.5 表格动态渲染3 (表格嵌套单选按钮讲解)
+			1.处理bug,天气接口出了问题，暂时显示静态的天气
+
+			2.table 
+				rowSelection 属性
+					type/selectedRowKeys
+						type 类型有rowItem 单选还是多选
+				onRow 属性
+					selectedRowKeys 和 onRow 中 onClick 配合，选中一行

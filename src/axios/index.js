@@ -14,6 +14,7 @@ class Axios{
 			JsonP(options.url, {
 				param: 'callback'
 			}, (err, response)=>{
+				// console.log('jsonp response=>', response)
 				// TODO 
 				// debugger
 				if(response.status === 'success'){
@@ -39,6 +40,7 @@ class Axios{
 				timeout: 5000,
 				params: (options.data && options.data.params) || '',
 			}).then((response)=>{
+				// console.log('ajax request response=>', response)
 				if(options.data && options.data.isShowLoading !== false){
 					loading = document.getElementById('ajaxLoading')
 					loading.style.display = 'none'
