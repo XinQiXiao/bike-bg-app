@@ -202,3 +202,8 @@
 				（假筛选，数据没有删除，有数据刷新和提示）
 
 		t0.7.7 表格分页
+			自定义分页函数 pagination
+			属性
+				onChange, current, pageSize, total, showTotal, showQuickJumper,
+
+		t0.7.8 高级表格讲解1	

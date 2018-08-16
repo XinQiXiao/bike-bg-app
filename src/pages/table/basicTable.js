@@ -8,6 +8,9 @@ import _ from 'lodash'
 // axios
 import axiosApi from '../../axios'
 
+// util
+import { utils } from '../../utils'
+
 // const 
 const dataSource = [
 	{
@@ -108,7 +111,12 @@ class Page extends Component{
 		dataSource: [],
 		dataSource2: [],
 		selectedRowKeys: [],
-		selectedRows: []
+		selectedRows: [],
+		pagination: null,
+	}
+
+	params = {
+		page: 1
 	}
 
 	componentDidMount(){
@@ -121,11 +129,12 @@ class Page extends Component{
 	// 动态获取 mock 数据
 	_request = async ()=> {
 		try{
+			let _this = this
 			const ret = await axiosApi.ajax({
 				url: '/table/list',
 				data: {
 					parmas: {
-						page: 1
+						page: this.params.page
 					},
 					isShowLoading: true,
 				}
@@ -133,7 +142,11 @@ class Page extends Component{
 			this.setState({
 				dataSource2: _.isArray(ret.list) ? ret.list : [],
 				selectedRowKeys: [],
-				selectedRows: []
+				selectedRows: [],
+				pagination: utils.pagination(ret, (current)=>{
+					_this.params.page = current 
+					this._request()
+				})
 			})
 		} catch(e){
 			console.log('_request e=>', e)
@@ -232,6 +245,15 @@ class Page extends Component{
 						columns={columns}
 						dataSource={this.state.dataSource2}
 						pagination={false}
+						rowKey={record =>  record.id}
+					/>
+				</Card>
+				<Card title="表格分页" style={{marginTop: 10}}>
+					<Table 
+						bordered
+						columns={columns}
+						dataSource={this.state.dataSource2}
+						pagination={this.state.pagination}
 						rowKey={record =>  record.id}
 					/>
 				</Card>
