@@ -207,3 +207,17 @@
 				onChange, current, pageSize, total, showTotal, showQuickJumper,
 
 		t0.7.8 高级表格讲解1	
+			1.创建 highTable  page 
+			2.提取表格公共数据部分 
+				columns, dataSource
+
+			头部固定
+				table scroll属性， 指定 scroll y 长度
+				bug: 发现表头和 表每列内容不一致，需要在columns里设定，每列宽度
+
+			左侧固定
+				计算 columns 宽度方法
+				fixed 固定columns某一列
+					左右固定
+
+		t0.7.9 高级表格讲解2

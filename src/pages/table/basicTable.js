@@ -12,99 +12,7 @@ import axiosApi from '../../axios'
 import { utils } from '../../utils'
 
 // const 
-const dataSource = [
-	{
-		id: 0,
-		userName: 'Jack',
-		sex: 1,
-		state: 1,
-		interest: 1,
-		birthday: '2000-1-1',
-		address: '北京市朝阳区',
-		getUpTime: '8:10'
-	},
-	{
-		id: 1,
-		userName: 'Tom',
-		sex: 0,
-		state: 2,
-		interest: 2,
-		birthday: '2006-6-3',
-		address: '北京市海淀区',
-		getUpTime: '9:10'
-	},
-	{
-		id: 2,
-		userName: 'Lisi',
-		sex: 1,
-		state: 3,
-		interest: 3,
-		birthday: '2002-10-1',
-		address: '北京市通州区',
-		getUpTime: '7:30'
-	},
-]
-
-const columns = [
-	{
-		title: 'id',
-		dataIndex: 'id',
-	},
-	{
-		title: '用户姓名',
-		dataIndex: 'userName',
-	},
-	{
-		title: '性别',
-		dataIndex: 'sex',
-		render(sex){
-			return sex === 1 ? '男' : '女'
-		}
-	},
-	{
-		title: '状态',
-		dataIndex: 'state',
-		render(state){
-			let config = {
-				'1': '咸鱼一枚',
-				'2': '风华浪子',
-				'3': '北大才子一枚',
-				'4': '百度FE',
-				'5': '创业者',
-			}
-			return config[state]
-		}
-	},
-	{
-		title: '爱好',
-		dataIndex: 'interest',
-		render(interest){
-			let config = {
-				'1': '游泳',
-				'2': '打篮球',
-				'3': '踢足球',
-				'4': '跑步',
-				'5': '爬山',
-				'6': '骑行',
-				'7': '桌球',
-				'8': '麦霸',
-			}
-			return config[interest]
-		}
-	},
-	{
-		title: '生日',
-		dataIndex: 'birthday',
-	},
-	{
-		title: '地址',
-		dataIndex: 'address',
-	},
-	{
-		title: '早起时间',
-		dataIndex: 'getUpTime',
-	},
-]
+import { dataSourceConst, columnsConst } from './contants'
 
 class Page extends Component{
 	state = {
@@ -121,7 +29,7 @@ class Page extends Component{
 
 	componentDidMount(){
 		this.setState({
-			dataSource: dataSource
+			dataSource: dataSourceConst
 		})
 		this._request()
 	}
@@ -198,6 +106,7 @@ class Page extends Component{
 				})
 			}
 		}
+		const columns = _.cloneDeep(columnsConst)
 		return (
 			<div >
 				<Card title="基础表格">

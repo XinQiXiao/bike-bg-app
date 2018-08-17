@@ -27,6 +27,7 @@ class Axios{
 	}
 
 	static ajax(options){
+		// 展示 页面 loading
 		let loading 
 		if(options.data && options.data.isShowLoading !== false){
 			loading = document.getElementById('ajaxLoading')
@@ -41,6 +42,7 @@ class Axios{
 				params: (options.data && options.data.params) || '',
 			}).then((response)=>{
 				// console.log('ajax request response=>', response)
+				// 页面 loading 关闭
 				if(options.data && options.data.isShowLoading !== false){
 					loading = document.getElementById('ajaxLoading')
 					loading.style.display = 'none'

@@ -17,7 +17,7 @@ import {
 	// Form
 	FormLogin, FormRegister,
 	// table
-	BasicPage,
+	BasicTablePage, HighTablePage,
 } from './pages'
 
 class IRouter extends Component{
@@ -42,7 +42,8 @@ class IRouter extends Component{
 								<Route path="/admin/form/login" component={FormLogin} />
 								<Route path="/admin/form/reg" component={FormRegister} />
 								{/* Table */}
-								<Route path="/admin/table/basic" component={BasicPage} />
+								<Route path="/admin/table/basic" component={BasicTablePage} />
+								<Route path="/admin/table/high" component={HighTablePage} />
 								<Route component={NoMatchPage} />
 							</Switch>
 						</Admin>
