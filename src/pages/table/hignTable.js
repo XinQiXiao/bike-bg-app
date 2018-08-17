@@ -9,11 +9,12 @@ import _ from 'lodash'
 import axiosApi from '../../axios'
 
 // const 
-import { columnsConst, columnsLongConst, } from './contants'
+import { columnsConst, columnsLongConst, columnsSortColumns, columnsHandleColumns} from './contants'
 
 class Page extends Component{
 	state = {
-		tableDataSource: []
+		tableDataSource: [],
+		sortOrder: null,
 	}
 
 	longColumnsWidth = 0
@@ -27,7 +28,7 @@ class Page extends Component{
 	_requestData = async ()=>{
 		try{
 			const ret = await axiosApi.ajax({
-				url: '/table/list',
+				url: '/table/high/list',
 				data: {
 					parmas: {
 						page: 1
@@ -46,6 +47,8 @@ class Page extends Component{
 	render(){
 		const columns = _.cloneDeep(columnsConst)
 		const longColumns = _.cloneDeep(columnsLongConst)
+		const sortColumns = _.cloneDeep(columnsSortColumns)
+		const handleColumns = _.cloneDeep(columnsHandleColumns)
 		const { tableDataSource } = this.state
 		return (
 			<div>
@@ -55,7 +58,7 @@ class Page extends Component{
 						columns={columns}
 						dataSource={tableDataSource}
 						pagination={false}
-						scroll={{y: 300}}
+						scroll={{y: 240}}
 						rowKey={record =>  record.id}
 					/>
 				</Card>
@@ -65,7 +68,25 @@ class Page extends Component{
 						columns={longColumns}
 						dataSource={tableDataSource}
 						pagination={false}
-						scroll={{x: this.longColumnsWidth}}
+						scroll={{x: this.longColumnsWidth, y: 300}}
+						rowKey={record =>  record.id}
+					/>
+				</Card>
+				<Card title="表格排序" style={{marginTop: 10}}>
+					<Table 
+						bordered
+						columns={sortColumns}
+						dataSource={tableDataSource}
+						pagination={false}
+						rowKey={record =>  record.id}
+					/>
+				</Card>
+				<Card title="操作按钮" style={{marginTop: 10}}>
+					<Table 
+						bordered
+						columns={handleColumns}
+						dataSource={tableDataSource}
+						pagination={false}
 						rowKey={record =>  record.id}
 					/>
 				</Card>

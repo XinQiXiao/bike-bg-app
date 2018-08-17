@@ -2,6 +2,8 @@
  * create at 08/17/18
  * 表格一些常量
  */
+import React from 'react'
+import { Badge, Button } from 'antd'
 
 const dataSourceConst = [
 	{
@@ -54,6 +56,11 @@ const columnsConst = [
 		render(sex){
 			return sex === 1 ? '男' : '女'
 		}
+	},
+	{
+		title: '年龄',
+		dataIndex: 'age',
+		width: 80,
 	},
 	{
 		title: '状态',
@@ -211,8 +218,132 @@ const columnsLongConst = [
 	},
 ]
 
+const columnsSortColumns = [
+	{
+		title: 'id',
+		dataIndex: 'id',
+	},
+	{
+		title: '用户姓名',
+		dataIndex: 'userName',
+	},
+	{
+		title: '性别',
+		dataIndex: 'sex',
+		render(sex){
+			return sex === 1 ? '男' : '女'
+		}
+	},
+	{
+		title: '年龄',
+		dataIndex: 'age',
+		sorter:(a, b)=> a.age - b.age,
+		defaultSortOrder: 'ascend',
+	},
+	{
+		title: '状态',
+		dataIndex: 'state',
+		render(state){
+			let config = {
+				'1': '咸鱼一枚',
+				'2': '风华浪子',
+				'3': '北大才子一枚',
+				'4': '百度FE',
+				'5': '创业者',
+			}
+			return config[state]
+		}
+	},
+	{
+		title: '爱好',
+		dataIndex: 'interest',
+		render(interest){
+			let config = {
+				'1': '游泳',
+				'2': '打篮球',
+				'3': '踢足球',
+				'4': '跑步',
+				'5': '爬山',
+				'6': '骑行',
+				'7': '桌球',
+				'8': '麦霸',
+			}
+			return config[interest]
+		}
+	},
+	{
+		title: '生日',
+		dataIndex: 'birthday',
+	},
+]
+
+const columnsHandleColumns = [
+	{
+		title: 'id',
+		dataIndex: 'id',
+	},
+	{
+		title: '用户姓名',
+		dataIndex: 'userName',
+	},
+	{
+		title: '性别',
+		dataIndex: 'sex',
+		render(sex){
+			return sex === 1 ? '男' : '女'
+		}
+	},
+	{
+		title: '年龄',
+		dataIndex: 'age',
+		sorter:(a, b)=> a.age - b.age,
+		defaultSortOrder: 'ascend',
+	},
+	{
+		title: '状态',
+		dataIndex: 'state',
+		render(state){
+			let config = {
+				'1': <Badge status="default" text='咸鱼一枚'/>,
+				'2': <Badge status='error' text='风华浪子'/>,
+				'3': <Badge status='processing' text='北大才子一枚'/>,
+				'4': <Badge status='success' text='百度FE'/>,
+				'5': <Badge status='warning' text='创业者'/>,
+			}
+			return config[state]
+		}
+	},
+	{
+		title: '爱好',
+		dataIndex: 'interest',
+		render(interest){
+			let config = {
+				'1': '游泳',
+				'2': '打篮球',
+				'3': '踢足球',
+				'4': '跑步',
+				'5': '爬山',
+				'6': '骑行',
+				'7': '桌球',
+				'8': '麦霸',
+			}
+			return config[interest]
+		}
+	},
+	{
+		title: '操作',
+		render(){
+			return (
+				<Button size="small"  onClick={()=> null}>删除</Button>
+			)
+		}
+	},
+]
+
 export {
 	dataSourceConst,
 	columnsConst,
 	columnsLongConst,
+	columnsSortColumns,
+	columnsHandleColumns,
 }
