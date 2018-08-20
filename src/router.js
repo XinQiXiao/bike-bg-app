@@ -18,6 +18,8 @@ import {
 	FormLogin, FormRegister,
 	// table
 	BasicTablePage, HighTablePage,
+	// city
+	CityPage,
 } from './pages'
 
 class IRouter extends Component{
@@ -44,6 +46,8 @@ class IRouter extends Component{
 								{/* Table */}
 								<Route path="/admin/table/basic" component={BasicTablePage} />
 								<Route path="/admin/table/high" component={HighTablePage} />
+								{/* City */}
+								<Route path="/admin/city" component={CityPage} />
 								<Route component={NoMatchPage} />
 							</Switch>
 						</Admin>

@@ -20,6 +20,9 @@ import { FormLogin, FormRegister, } from './form'
 // table
 import { BasicPage as BasicTablePage, HighPge as HighTablePage, } from './table'
 
+// 城市管理
+import CityPage from './city'
+
 // 404
 import NoMatchPage from './nomatch'
 
@@ -47,6 +50,8 @@ export {
 	// table
 	BasicTablePage,
 	HighTablePage,
+	// city 
+	CityPage,
 	// 404
 	NoMatchPage,
 }
