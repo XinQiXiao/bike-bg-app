@@ -232,9 +232,17 @@
 				columns 操作 item 直接 render
 
 	##
-		t0.8.1 城市管理模块1
+		t0.8.1 城市管理模块上
 			1.查询、筛选 filterForm
 
 			2.内容表格
-				1. 开通按钮
+				1. 开通按钮 (功能区)
 				2. table
+
+		t0.8.2 城市管理模块下
+			1. 在easy-mock 里创建 open_city接口
+			2. 处理 columns item 返回的类型，不是基本类型（string, number, boolean）
+				city_admins (Array)
+			3.调整表格样式
+				定义通用 content-wrap 样式（style common）
+			

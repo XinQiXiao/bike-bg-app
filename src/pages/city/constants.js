@@ -19,12 +19,25 @@ const cityColumns = [
 		dataIndex: 'op_mode'
 	},
 	{
-		title: '授权加盟商',
-		dataIndex: 'franchisee_name'
+		title: '城市管理员',
+		dataIndex: 'city_admins',
+		render(arr){
+			return arr.map((item)=>{
+				return item.user_name
+			}).join(',')
+		}
 	},
 	{
-		title: '加盟商授权状态',
-		dataIndex: 'auth_status'
+		title: '城市开通时间',
+		dataIndex: 'open_time'
+	},
+	{
+		title: '操作时间',
+		dataIndex: 'update_time'
+	},
+	{
+		title: '操作人',
+		dataIndex: 'sys_user_name'
 	},
 ]
 
