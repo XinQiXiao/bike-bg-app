@@ -231,6 +231,7 @@
 
 				columns 操作 item 直接 render
 
+
 	##
 		t0.8.1 城市管理模块上
 			1.查询、筛选 filterForm
@@ -246,3 +247,10 @@
 			3.调整表格样式
 				定义通用 content-wrap 样式（style common）
 			
+		t0.8.3 开通城市实现
+			1.开通城市 modal
+				modal嵌套表单
+				table formItem 栅格布局	
+			2.table wrappedComponentRef 属性使用
+			3.创建 开通城市 接口 city/open
+			4. moment转换时间戳

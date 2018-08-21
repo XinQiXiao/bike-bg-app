@@ -47,9 +47,12 @@ class Axios{
 					loading = document.getElementById('ajaxLoading')
 					loading.style.display = 'none'
 				}
+				// 打印请求日志
+				console.log('axios ajax response=>', response)
 				if(response.status === 200){
 					const res = response.data
 					if(res.code === 0){
+						
 						resolve(res.data)
 					} else {
 						Modal.info({

@@ -2,7 +2,12 @@
 import moment from 'moment'
 
 function currentTimeStr(){
-	return moment().format('YY-MM-DD HH:mm:ss')
+	return moment().format('YYYY-MM-DD HH:mm:ss')
+}
+
+function transformTime(timeNum){
+	let result = moment(timeNum).format('YYYY-MM-DD HH:mm:ss')
+	return result
 }
 
 function pagination(data, callback){
@@ -23,4 +28,5 @@ function pagination(data, callback){
 export default {
 	currentTimeStr,
 	pagination,
+	transformTime,
 }
