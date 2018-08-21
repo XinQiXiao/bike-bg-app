@@ -20,6 +20,8 @@ import {
 	BasicTablePage, HighTablePage,
 	// city
 	CityPage,
+	// order
+	OrderPage,
 } from './pages'
 
 class IRouter extends Component{
@@ -48,6 +50,8 @@ class IRouter extends Component{
 								<Route path="/admin/table/high" component={HighTablePage} />
 								{/* City */}
 								<Route path="/admin/city" component={CityPage} />
+								{/* order */}
+								<Route path="/admin/order" component={OrderPage} />
 								<Route component={NoMatchPage} />
 							</Switch>
 						</Admin>

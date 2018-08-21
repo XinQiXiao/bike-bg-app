@@ -23,6 +23,9 @@ import { BasicPage as BasicTablePage, HighPge as HighTablePage, } from './table'
 // 城市管理
 import CityPage from './city'
 
+// 订单
+import OrderPage from './order'
+
 // 404
 import NoMatchPage from './nomatch'
 
@@ -52,6 +55,8 @@ export {
 	HighTablePage,
 	// city 
 	CityPage,
+	// order
+	OrderPage,
 	// 404
 	NoMatchPage,
 }
