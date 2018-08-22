@@ -38,10 +38,9 @@ class Axios{
 				url: options.url,
 				method: 'get',
 				baseURL: baseApi,
-				timeout: 5000,
+				timeout: 30000,
 				params: (options.data && options.data.params) || '',
 			}).then((response)=>{
-				// console.log('ajax request response=>', response)
 				// 页面 loading 关闭
 				if(options.data && options.data.isShowLoading !== false){
 					loading = document.getElementById('ajaxLoading')

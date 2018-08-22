@@ -264,3 +264,15 @@
 				c.table
 			2.easy-mock 创建 order/list 接口
 			3.创建 table columns； 请求list 数据
+
+		t0.9.2 订单列表(下)
+			1. 创建 结束订单 Modal
+			2. 创建车辆订单 接口  order/ebike_info, 订单结束 接口 order/finish_order
+			3. 选中某一订单 请求该订单信息（ebike_info）， 获取数据，传递数据给 Modal form；
+			结束订单（finish_order），刷新页面
+			4.单选按钮 单选选择与删除订单交互
+			5.封装计算表 宽方法到 util, 调整订单列表 各个单元格宽度
+			6.调整返回数据显示格式
+			7.封装货币装换方法， translateToRMB
+
+		t0.9.3 通用页面结构设计

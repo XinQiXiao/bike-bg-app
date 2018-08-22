@@ -9,7 +9,12 @@ import _ from 'lodash'
 import axiosApi from '../../axios'
 
 // const 
-import { columnsConst, columnsLongConst, columnsSortColumns, columnsHandleColumns} from './contants'
+import { 
+	columnsConst, columnsLongConst, columnsSortColumns, columnsHandleColumns
+} from './contants'
+
+// utils
+import { utils } from '../../utils'
 
 class Page extends Component{
 	state = {
@@ -17,12 +22,11 @@ class Page extends Component{
 		sortOrder: null,
 	}
 
-	longColumnsWidth = 0
+	// 计算table width
+	longColumnsWidth = utils.calculateTableWidth(columnsLongConst)
 
 	componentDidMount(){
 		this._requestData()
-
-		this.longColumnsWidth = calculateColumnsWidth(columnsLongConst)
 	}
 
 	_requestData = async ()=>{
@@ -93,17 +97,6 @@ class Page extends Component{
 			</div>
 		)
 	}
-}
-
-/**
- * 计算 columns 宽度
- */
-function calculateColumnsWidth(targetColumns){
-	let retWidth = 0
-	for (const col of targetColumns) {
-		retWidth += col.width
-	}
-	return retWidth
 }
 
 export default Page
