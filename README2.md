@@ -276,3 +276,9 @@
 			7.封装货币装换方法， translateToRMB
 
 		t0.9.3 通用页面结构设计
+			1.创建通用common route (订单详情)
+			2.通用界面路由，通用详情界面 router Common
+			3. header less 中引入“simple-page”样式， common router 头部使用
+			4. Header 组件修改
+
+		t0.9.4 订单基础信息实现

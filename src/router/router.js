@@ -6,7 +6,8 @@ import { HashRouter, Route, Switch } from 'react-router-dom'
 
 // app admin
 import App from './App'
-import Admin from './Admin'
+import Admin from './AdminRoute'
+import Common from './CommonRoute'
 
 // router
 import { 
@@ -22,7 +23,7 @@ import {
 	CityPage,
 	// order
 	OrderPage,
-} from './pages'
+} from '../pages'
 
 class IRouter extends Component{
 	render(){
@@ -56,7 +57,14 @@ class IRouter extends Component{
 							</Switch>
 						</Admin>
 					} />
-					<Route path="/order/detail" component={Login} />
+					<Route path="/common" render={()=> 
+						<Common>
+							<Switch>
+								{/* order detail */}
+								<Route path="/common/order/detail/:orderId" component={Login}/>
+							</Switch>
+						</Common>	
+					} />
 				</App>
 			</HashRouter>
 		)

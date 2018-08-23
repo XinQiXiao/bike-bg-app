@@ -5,10 +5,10 @@ import React, { Component } from 'react'
 import { Row, Col } from 'antd'
 
 // components
-import { Header, Footer, NavLeft } from './components'
+import { Header, Footer, NavLeft } from '../components'
 
 // style
-import './style/common.less'
+import '../style/common.less'
 
 class AdminComponent extends Component{
 	render(){

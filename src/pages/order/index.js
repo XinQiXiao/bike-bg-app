@@ -79,6 +79,23 @@ class CurrentPage extends Component{
 		})
 	}
 
+	// 点击订单详情
+	_orderInfoClick = ()=>{
+		try{
+			const { selectedRowId } = this.state
+			if(!selectedRowId){
+				message.error('请选择要查看的订单')
+				throw new Error('not select order item')
+			}
+			// 通过新窗口打开
+			window.open(`/#/common/order/detail/${selectedRowId}`, '_blank')
+			// 通过 hash 路由跳转
+			// window.location.href = `/#/common/order/detail/${selectedRowId}`
+		}catch(e){
+			console.log('_orderInfoClick e=>', e)
+		}
+	}
+
 	// 结束某一订单
 	_orderFinishClick = async ()=>{
 		try{
@@ -146,7 +163,7 @@ class CurrentPage extends Component{
 					<HeaderFilterForm />
 				</Card>
 				<Card style={{marginTop: 10}}>
-					<Button type="primary">订单详情</Button>
+					<Button type="primary" onClick={this._orderInfoClick}>订单详情</Button>
 					<Button 
 						type="primary" style={{marginLeft: 30}}
 						onClick={this._orderFinishClick}

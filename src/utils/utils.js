@@ -50,8 +50,11 @@ function calculateTableWidth(targetColumns){
 	return retWidth
 }
 
+/**
+ *  money translate
+ */
 function translateToRMB(target){
-	let moneyNum = Number.parseInt(target/100).toFixed(2)
+	let moneyNum = Number.parseInt(target/100, 10).toFixed(2)
 	return '￥' + moneyNum
 }
 

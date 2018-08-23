@@ -56,28 +56,41 @@ class HeaderComponent extends Component{
 		const {
 			userName = '', systemTime = '', weather = '', dayPictureUrl = ''
 		} = this.state
+		const { menuType } = this.props
 		return (
 			<div className="header">
 				<Row className="header-top">
-					<Col span="24">
+					{
+						menuType === 'second' ? (
+							<Col span="6" className="logo">
+								<img src="/assets/logo-ant.svg" alt="ant-logo"/>
+								<span >单车 通用信息页面</span>
+							</Col>
+						) : null
+					}
+					<Col span={menuType === 'second' ? 18 : 24}>
 						<span>欢迎，{userName}</span>
 						<a href="javascript:void(0)">退出</a>
 					</Col>
 				</Row>
-				<Row className="breadcrumb">
-					<Col span="4" className="breadcrumb-title">
-						首页
-					</Col>
-					<Col span="20" className="weather">
-						<span className="date">{systemTime}</span>
-						<span className="weather-img">
-							<img src={dayPictureUrl} alt="weather-icon"/>
-						</span>
-						<span className="weather-detail">
-							{weather}
-						</span>
-					</Col>
-				</Row>
+				{
+					menuType === 'second' ? null : (
+						<Row className="breadcrumb">
+							<Col span="4" className="breadcrumb-title">
+								首页
+							</Col>
+							<Col span="20" className="weather">
+								<span className="date">{systemTime}</span>
+								<span className="weather-img">
+									<img src={dayPictureUrl} alt="weather-icon"/>
+								</span>
+								<span className="weather-detail">
+									{weather}
+								</span>
+							</Col>
+						</Row>
+					)
+				}
 			</div>
 		)
 	}
