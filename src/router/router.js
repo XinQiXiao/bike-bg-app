@@ -22,7 +22,7 @@ import {
 	// city
 	CityPage,
 	// order
-	OrderPage,
+	OrderListPage, OrderDetailPage,
 } from '../pages'
 
 class IRouter extends Component{
@@ -52,7 +52,7 @@ class IRouter extends Component{
 								{/* City */}
 								<Route path="/admin/city" component={CityPage} />
 								{/* order */}
-								<Route path="/admin/order" component={OrderPage} />
+								<Route path="/admin/order" component={OrderListPage} />
 								<Route component={NoMatchPage} />
 							</Switch>
 						</Admin>
@@ -61,7 +61,7 @@ class IRouter extends Component{
 						<Common>
 							<Switch>
 								{/* order detail */}
-								<Route path="/common/order/detail/:orderId" component={Login}/>
+								<Route path="/common/order/detail/:orderId" component={OrderDetailPage}/>
 							</Switch>
 						</Common>	
 					} />

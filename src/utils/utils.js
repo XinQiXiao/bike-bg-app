@@ -58,10 +58,18 @@ function translateToRMB(target){
 	return '￥' + moneyNum
 }
 
+/**
+ * translate distance
+ */
+function translateDistance(target){
+	return target/1000 + 'km'
+}
+
 export default {
 	currentTimeStr,
 	pagination,
 	transformTime,
 	calculateTableWidth,
 	translateToRMB,
+	translateDistance,
 }

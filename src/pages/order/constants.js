@@ -32,7 +32,7 @@ const orderColumns = [
 		dataIndex: 'distance',
 		width: 80,
 		render(target){
-			return target/1000 + 'km'
+			return utils.translateDistance(target)
 		}
 	},
 	{

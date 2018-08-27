@@ -24,7 +24,7 @@ import { BasicPage as BasicTablePage, HighPge as HighTablePage, } from './table'
 import CityPage from './city'
 
 // 订单
-import OrderPage from './order'
+import { OrderListPage, OrderDetailPage, } from './order'
 
 // 404
 import NoMatchPage from './nomatch'
@@ -56,7 +56,8 @@ export {
 	// city 
 	CityPage,
 	// order
-	OrderPage,
+	OrderListPage,
+	OrderDetailPage,
 	// 404
 	NoMatchPage,
 }
