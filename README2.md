@@ -288,3 +288,16 @@
 			4. 创建订单详情接口 order/detail
 
 		t0.9.5 地图功能实现（上)
+			地图功能实现步骤， 截图url: https://www.jianshu.com/p/2ea9fbb195dd
+
+			1.创建ak,加载百度地图SDK 
+				加载： 在public index.html 文件 title 下引入地图 script
+				参考： http://lbsyun.baidu.com/index.php?title=jspopular/guide/helloworld
+			2.初始化地图
+				注意点 BMap 需要挂载在window对象下
+			3.添加地图组件
+				TODO 缩放组件和导航组件不显示
+			4.绘制用户行驶路线
+				添加 start & end icon
+
+		t0.9.6 地图功能实现（下)

@@ -4,6 +4,7 @@
  */
 import React, { Component } from 'react'
 import { Card } from 'antd'
+import _ from 'lodash'
 
 // axios
 import axiosApi from '../../axios'
@@ -18,6 +19,8 @@ class DetailPage extends Component{
 	state = {
 		orderInfo: null
 	}
+
+	map = null 
 
 	componentDidMount(){
 		this._requestInfo()
@@ -41,9 +44,52 @@ class DetailPage extends Component{
 			this.setState({
 				orderInfo: ret
 			})
+			this._renderMap()
 		}catch(e){
 			console.log('_requestInfo e=>', e)
 		}
+	}
+
+	// 初始化地图
+	_renderMap = ()=>{
+		try{
+			// 初始化地图
+			this.map = new window.BMap.Map('orderDetailMap')
+			// 设置地图中心坐标点
+			this.map.centerAndZoom('北京', 11)
+			// 添加控件
+			this._addMapControl()
+			// 添加路线图
+			this._drawBikeRoute(this.orderInfo.position_list)
+		} catch(e){
+			console.log('_renderMap e=>', e)
+		}
+	}
+	// 添加地图控件
+	_addMapControl = ()=>{
+		// TODO 没有显示
+		let map = this.map 
+		map.addControll(new window.BMap.ScaleControl({anchor: window.BMAP_ANCHOR_TOP_LEFT}))
+		map.addControll(new window.BMap.NavigationControl({anchor: window.BMAP_ANCHOR_TOP_RIGHT}))
+	}
+	// 绘制路线图
+	_drawBikeRoute = (positionList)=>{
+		// 添加起始坐标点
+		let map = this.map 
+		let startPoint = ''
+		let endPoint = ''
+		if(_.isArray(positionList) && positionList.length > 0){
+			const start = positionList[0]
+			// 起始 坐标 、icon, 坐标依赖marker
+			startPoint = new window.BMap.Point(start.lon, start.lat)
+			let startIcon = new window.BMap.Icon('/assets/start_point.png', new window.BMap.Size(36, 42), {
+				imageSize: new window.BMap.Size(36, 42),
+				anchor: new window.BMap.Size(36, 42),
+			})
+			let startMarker = new window.BMap.Marker(startPoint, {icon: startIcon})
+		}
+		
+		
 	}
 
 	render(){
@@ -51,7 +97,7 @@ class DetailPage extends Component{
 		return (
 			<div>
 				<Card>
-					<div id="orderDetailMap"></div>
+					<div id="orderDetailMap" className="order-map"></div>
 					<div className="detail-items">
 						<div className="item-title">基础信息</div>
 						<ul className="detail-form">
