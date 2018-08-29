@@ -1,7 +1,6 @@
 /**
  * create at 08/21/18
  */
-import React from 'react'
 
 // util
 import { utils } from '../../utils'
@@ -31,17 +30,15 @@ const orderColumns = [
 		title: '里程',
 		dataIndex: 'distance',
 		width: 80,
-		render(target){
-			return utils.translateDistance(target)
-		}
+		render: target => utils.translateDistance(target)
+		
 	},
 	{
 		title: '行程时长',
 		dataIndex: 'total_time',
 		width: 120,
-		render(target){
-			return target/1000 +'s'
-		}
+		render: target => (target/1000 +'s')
+		
 	},
 	{
 		title: '状态',
@@ -62,17 +59,15 @@ const orderColumns = [
 		title: '订单金额',
 		dataIndex: 'total_fee',
 		width: 120,
-		render(target){
-			return utils.translateToRMB(target)
-		}
+		render: target => utils.translateToRMB(target)
+		
 	},
 	{
 		title: '实付金额',
 		dataIndex: 'user_pay',
 		width: 120,
-		render(target){
-			return utils.translateToRMB(target)
-		}
+		render: target=> utils.translateToRMB(target)
+		
 	},
 ]
 

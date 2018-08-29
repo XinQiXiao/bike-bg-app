@@ -1,5 +1,11 @@
 
 import moment from 'moment'
+import React from 'react'
+import _ from 'lodash'
+import { Select } from 'antd'
+
+// const 
+const SelectOption = Select.Option
 
 /**
  * 获取当前时间
@@ -65,6 +71,21 @@ function translateDistance(target){
 	return target/1000 + 'km'
 }
 
+function getFormOptionList(data){
+	if(_.isNil(data)){
+		return []
+	}
+	let option = [
+		<SelectOption value="0" key="all_key"></SelectOption>
+	]
+	data.forEach((item)=>{
+		option.push(
+			<SelectOption value={item.id} key={item.id}>{item.name}</SelectOption>
+		)
+	})
+	return option
+}
+
 export default {
 	currentTimeStr,
 	pagination,
@@ -72,4 +93,5 @@ export default {
 	calculateTableWidth,
 	translateToRMB,
 	translateDistance,
+	getFormOptionList,
 }

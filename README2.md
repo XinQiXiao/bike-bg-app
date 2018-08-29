@@ -311,3 +311,7 @@
 			项目工程化， url ：https://www.jianshu.com/p/73585665a8a4
 
 		t0.10.2 模块化封装 BaseForm(1)
+			1.新建BaseForm 组件
+			2.封装 FilterForm 组件
+			3.定义常量 formConfig
+			4.在 util 封装 optionList 
