@@ -33,6 +33,9 @@ class Axios{
 			loading = document.getElementById('ajaxLoading')
 			loading.style.display = 'block'
 		}
+		if(options.isMock){
+			// 是mock数据，还是正式数据
+		}
 		return new Promise((resolve, reject)=>{
 			axios({
 				url: options.url,
@@ -51,7 +54,6 @@ class Axios{
 				if(response.status === 200){
 					const res = response.data
 					if(res.code === 0){
-						
 						resolve(res.data)
 					} else {
 						Modal.info({
