@@ -65,6 +65,19 @@ function translateDistance(target){
 	return target/1000 + 'km'
 }
 
+/**
+ * update selected item
+ * @param {*} target (this)
+ * @param {*} selectedRowKeys 
+ * @param {*} selectedItem 
+ */
+function updateSelectedItem(target, selectedRowKeys, selectedItem){
+	target.setState({
+		selectedRowKeys,
+		selectedItem
+	})
+}
+
 export default {
 	currentTimeStr,
 	pagination,
@@ -72,4 +85,5 @@ export default {
 	calculateTableWidth,
 	translateToRMB,
 	translateDistance,
+	updateSelectedItem,
 }

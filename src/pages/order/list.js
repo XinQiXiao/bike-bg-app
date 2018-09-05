@@ -9,7 +9,7 @@ import {
 import _ from 'lodash'
 
 // components
-import { FilterForm, formConfig } from '../../components'
+import { FilterForm, formConfig, ETable } from '../../components'
 
 // axios
 import axiosApi from '../../axios'
@@ -217,7 +217,15 @@ class CurrentPage extends Component{
 					>结束订单</Button>
 				</Card>
 				<div className="content-wrapper">
-					<Table 
+					<ETable 
+						// updateSelectedItem={(selectedRowKeys, selectedItem)=>{utils.updateSelectedItem(this, )}}
+						columns={orderColumns}
+						dataSource={list}
+						pagination={pagination}
+						rowSelection={'radio'}
+						selectedRowKeys={selectedRowKeys}
+					/>
+					{/*<Table 
 						bordered
 						rowSelection={rowSelection}
 						onRow={(record)=>{
@@ -232,7 +240,7 @@ class CurrentPage extends Component{
 						dataSource={list}
 						pagination={pagination}
 						rowKey={record =>  record.id}
-					/>
+					/>*/}
 				</div>
 				<Modal 
 					title="结束订单"
