@@ -4,36 +4,29 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Table } from 'antd'
-// import _ from 'lodash'
-
-// utils
-// import { utils } from '../../utils'
+import _ from 'lodash'
 
 class TableComponent extends Component{
 
-	_onSelectChange = ()=>{
-	}
-
-	_onRowClick = (record, index)=>{
-		const {rowSelection} = this.props
+	_onRowClick = (record)=>{
+		let {rowSelection, selectedRowKeys, updateSelectedItem} = this.props
 		if(rowSelection === 'checkbox'){
-
+			let eleIndex = _.isArray(selectedRowKeys) ? selectedRowKeys.indexOf(record.id) : -1
+			eleIndex === -1 ? ( selectedRowKeys.push(record.id)) : (selectedRowKeys.splice(eleIndex, 1))
 		} else if(rowSelection === 'radio'){
-			let selectedRowKeys = [record.id]
-			let selectedRowId = record.id
-			this.props.updateSelectedItem(selectedRowKeys, selectedRowId)
+			selectedRowKeys = [record.id]
 		}
+		updateSelectedItem(selectedRowKeys)
 	}
 
 	_tableInit = ()=>{
 		const { 
-			columns, dataSource, pagination, rowSelection, selectedRowKeys,
+			columns, dataSource, pagination, rowSelection, selectedRowKeys, scroll,
 		} = this.props
 
 		const defaultSection = {
 			type: 'radio',
 			selectedRowKeys,
-			onChange: this._onSelectChange,
 		}
 		let initSection = null
 		if(rowSelection === 'checkbox' || rowSelection === 'radio'){
@@ -48,10 +41,11 @@ class TableComponent extends Component{
 				pagination={pagination}
 				rowSelection={initSection}
 				rowKey={record =>  record.id}
-				onRow={(record, index)=>{
+				scroll={scroll}
+				onRow={(record)=>{
 					return {
 						onClick: ()=>{
-							this._onRowClick(record, index)
+							this._onRowClick(record)
 						}
 					}
 				}}

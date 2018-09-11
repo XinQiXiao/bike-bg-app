@@ -27,8 +27,7 @@ class CurrentPage extends Component{
 		pagination: null,
 		showFinishOrder: false,
 		orderFinishData: null, 
-		selectedRowKeys: [],
-		selectedRowId: 0
+		selectedRowKeys: [], // rowKeys 存储的即是选择 的 item ids 
 	}
 
 	tableWidth = utils.calculateTableWidth(orderColumns)+60 // 'radio' width 60
@@ -90,7 +89,6 @@ class CurrentPage extends Component{
 			this.setState({
 				list: _.isArray(ret.list) ? ret.list : [],
 				selectedRowKeys: [],
-				selectedRowId: 0, // 还原 选择的订单id
 				pagination: utils.pagination(ret, (current)=>{
 					_this.params.page = current
 					// 翻页请求数据
@@ -105,25 +103,25 @@ class CurrentPage extends Component{
 	// 点击订单详情
 	_orderInfoClick = ()=>{
 		try{
-			const { selectedRowId } = this.state
-			if(!selectedRowId){
+			const { selectedRowKeys } = this.state
+			if(!_.isArray(selectedRowKeys) || selectedRowKeys.length===0){
 				message.error('请选择要查看的订单')
 				throw new Error('not select order item')
 			}
 			// 通过新窗口打开
-			window.open(`/#/common/order/detail/${selectedRowId}`, '_blank')
+			window.open(`/#/common/order/detail/${selectedRowKeys[0]}`, '_blank')
 			// 通过 hash 路由跳转
-			// window.location.href = `/#/common/order/detail/${selectedRowId}`
+			// window.location.href = `/#/common/order/detail/${selectedRowKeys[0]}`
 		}catch(e){
 			console.log('_orderInfoClick e=>', e)
 		}
 	}
 
-	// 结束某一订单
+	// 结束某些订单
 	_orderFinishClick = async ()=>{
 		try{
-			const { selectedRowId } = this.state
-			if(!selectedRowId){
+			const { selectedRowKeys } = this.state
+			if(!_.isArray(selectedRowKeys)|| selectedRowKeys.length===0){
 				message.error('请选择要结束的订单')
 				throw new Error('not select order item')
 			}
@@ -132,7 +130,7 @@ class CurrentPage extends Component{
 				data: {
 					isShowLoading: true,
 					params: {
-						id: selectedRowId
+						ids: selectedRowKeys
 					}
 				}
 			})
@@ -150,7 +148,7 @@ class CurrentPage extends Component{
 			showFinishOrder: false
 		})
 	}
-	// 结束某一订单 确认
+	// 结束某些订单 确认
 	_finishModalSubmit = async ()=>{
 		try{
 			const ret = await axiosApi.ajax({
@@ -158,7 +156,7 @@ class CurrentPage extends Component{
 				data: {
 					isShowLoading: true,
 					params: {
-						id: this.state.selectedRowId
+						ids: this.state.selectedRowKeys
 					}
 				}
 			})
@@ -205,11 +203,12 @@ class CurrentPage extends Component{
 				</Card>
 				<div className="content-wrapper">
 					<ETable 
-						updateSelectedItem={(keys, itemId)=>utils.updateSelectedItem(this, keys, itemId)}
+						updateSelectedItem={(keys)=>utils.updateSelectedItem(this, keys)}
 						columns={orderColumns}
 						dataSource={list}
 						pagination={pagination}
 						rowSelection={'checkbox'}
+						scroll={{x: this.tableWidth, y: 500}}
 						selectedRowKeys={selectedRowKeys}
 					/>
 				</div>

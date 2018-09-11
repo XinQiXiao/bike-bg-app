@@ -334,3 +334,10 @@
 				eTable 绑定onRow事件 onClick 中通过updateSelectedItem 属性将 selectedRowKeys 传递回页面，做单选刷新
 		
 		t0.10.6 表格封装（3）
+			2.复选框 单选功能实现
+				去掉 selectedRowId选项， 单选、复选统一都用selectedRowKeys
+				处理复选情况， 包括item未选和已选中情况
+
+
+	##
+		t0.11.1
