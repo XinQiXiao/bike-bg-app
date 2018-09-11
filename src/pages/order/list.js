@@ -4,7 +4,7 @@
 
 import React, { Component } from 'react'
 import { 
-	Card, Button, Table, Modal, message, Form, 
+	Card, Button, Modal, message, Form, 
 } from 'antd'
 import _ from 'lodash'
 
@@ -102,15 +102,6 @@ class CurrentPage extends Component{
 		}
 	}
 
-	// table 行点击
-	_tableRowClick = (item)=>{
-		let selectedKeys = item.id ? [item.id] : []
-		this.setState({
-			selectedRowKeys: selectedKeys,
-			selectedRowId: item.id
-		})
-	}
-
 	// 点击订单详情
 	_orderInfoClick = ()=>{
 		try{
@@ -198,10 +189,6 @@ class CurrentPage extends Component{
 		const { 
 			list, pagination, showFinishOrder, orderFinishData, selectedRowKeys,
 		} = this.state
-		const rowSelection = {
-			type: 'radio',
-      selectedRowKeys,
-    }
 		return (
 			<div>
 				<Card >
@@ -218,29 +205,13 @@ class CurrentPage extends Component{
 				</Card>
 				<div className="content-wrapper">
 					<ETable 
-						// updateSelectedItem={(selectedRowKeys, selectedItem)=>{utils.updateSelectedItem(this, )}}
+						updateSelectedItem={(keys, itemId)=>utils.updateSelectedItem(this, keys, itemId)}
 						columns={orderColumns}
 						dataSource={list}
 						pagination={pagination}
-						rowSelection={'radio'}
+						rowSelection={'checkbox'}
 						selectedRowKeys={selectedRowKeys}
 					/>
-					{/*<Table 
-						bordered
-						rowSelection={rowSelection}
-						onRow={(record)=>{
-							return {
-								onClick:()=>{
-									this._tableRowClick(record)
-								} 
-							}
-						}}
-						scroll={{x: this.tableWidth, y: 500}}
-						columns={orderColumns}
-						dataSource={list}
-						pagination={pagination}
-						rowKey={record =>  record.id}
-					/>*/}
 				</div>
 				<Modal 
 					title="结束订单"

@@ -330,3 +330,7 @@
 			2. 封装 eTable
 		
 		t0.10.6 表格封装（2）
+			1. 表格单选功能实现
+				eTable 绑定onRow事件 onClick 中通过updateSelectedItem 属性将 selectedRowKeys 传递回页面，做单选刷新
+		
+		t0.10.6 表格封装（3）

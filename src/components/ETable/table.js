@@ -12,7 +12,17 @@ import { Table } from 'antd'
 class TableComponent extends Component{
 
 	_onSelectChange = ()=>{
+	}
 
+	_onRowClick = (record, index)=>{
+		const {rowSelection} = this.props
+		if(rowSelection === 'checkbox'){
+
+		} else if(rowSelection === 'radio'){
+			let selectedRowKeys = [record.id]
+			let selectedRowId = record.id
+			this.props.updateSelectedItem(selectedRowKeys, selectedRowId)
+		}
 	}
 
 	_tableInit = ()=>{
@@ -38,6 +48,13 @@ class TableComponent extends Component{
 				pagination={pagination}
 				rowSelection={initSection}
 				rowKey={record =>  record.id}
+				onRow={(record, index)=>{
+					return {
+						onClick: ()=>{
+							this._onRowClick(record, index)
+						}
+					}
+				}}
 			/>
 		)
 	}
