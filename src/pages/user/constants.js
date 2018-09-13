@@ -30,6 +30,11 @@ const userColumns = [
 		}
 	},
 	{
+		title: '手机号',
+		dataIndex: 'tel',
+		width: 120,
+	},
+	{
 		title: '状态',
 		dataIndex: 'state',
 		width: 160,
@@ -65,7 +70,7 @@ const userColumns = [
 	},
 	{
 		title: '注册时间',
-		dataIndex: 'time',
+		dataIndex: 'registertime',
 		width: 140,
 	},
 ]
