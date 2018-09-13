@@ -46,22 +46,20 @@ class FilterForm extends Component{
 		const {getFieldsValue, validateFields, resetFields} = this.props.form
 		switch(type){
 			case optionsBtnType.QUERY:
-				{
-					// 查询、提交
-					let formValues = getFieldsValue()
-					validateFields((err, values)=>{
-						if(!err){
-							pressFunc(code, formValues)
-						} 
-					})
-				}
+				// 查询、提交
+				let formValues = getFieldsValue()
+				validateFields((err, values)=>{
+					if(!err){
+						pressFunc(code, formValues)
+					} 
+				})
 				break
 			case optionsBtnType.RESET: 
-				{
-					// 重置
-					resetFields()
-					pressFunc(code)
-				}
+				// 重置
+				resetFields()
+				pressFunc(code)
+				break
+			default:
 				break
 		}
 	}

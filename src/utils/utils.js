@@ -90,6 +90,8 @@ function transformSex(num){
 		case 2: 
 			reSex = '女'
 			break
+		default:
+			break
 	}
 	return reSex
 }
@@ -107,6 +109,8 @@ function transformMarry(num){
 		case 1: 
 			reMarry = '已婚'
 			break 
+		default:
+			break
 	}
 	return reMarry
 }
