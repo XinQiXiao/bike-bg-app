@@ -20,6 +20,8 @@ import {utils} from '../../utils'
 // const 
 import { orderColumns } from './constants'
 const FormItem = Form.Item
+const FORM_RESET = 'form_reset'
+const FORM_QUERY = 'form_query'
 
 class CurrentPage extends Component{
 	state = {
@@ -35,9 +37,10 @@ class CurrentPage extends Component{
 	params = {
 		page: 1
 	}
+	
 	formList = [
 		{
-			type: formConfig.BaseFormType.SELECT,
+			type: formConfig.baseFormType.SELECT,
 			field: 'city',
 			label: '城市',
 			placeholder: '全部',
@@ -51,12 +54,12 @@ class CurrentPage extends Component{
 			]
 		},
 		{
-			type: formConfig.BaseFormType.QUERY_TIME,
+			type: formConfig.baseFormType.QUERY_TIME,
 			label: '订单时间',
 			placeholder: '选择时间',
 		},
 		{
-			type: formConfig.BaseFormType.SELECT,
+			type: formConfig.baseFormType.SELECT,
 			field: 'order_status',
 			label: '订单状态',
 			placeholder: '全部',
@@ -68,6 +71,40 @@ class CurrentPage extends Component{
 				{id: 2, name: '行程结束'},
 			]
 		},
+	]
+
+	// form 查询
+	_queryClick = (code, values)=>{
+		if(code === FORM_QUERY){
+			this.params = {
+				...this.params,
+				...values,
+			}
+			// console.log('_queryClick start_time=>', values.start_time.format('YYYY-MM-DD'))
+			this._requestList()
+		}
+	}
+	// form 重置
+	_resetClick = (code)=>{
+		if(code === FORM_RESET){
+			this._requestList()
+		}
+	}
+	formOptions = [
+		{
+			type: formConfig.optionsBtnType.QUERY,
+			code: FORM_QUERY,
+			btnType: 'primary',
+			style: {margin: '0 20px'},
+			title: '查询',
+			optionItemPress: this._queryClick,
+		},
+		{
+			type: formConfig.optionsBtnType.RESET,
+			code: FORM_RESET,
+			title: '重置',
+			optionItemPress: this._resetClick
+		}
 	]
 
 	componentDidMount(){
@@ -170,18 +207,6 @@ class CurrentPage extends Component{
 		}
 	}
 
-	// form 查询
-	_queryClick = (params)=>{
-		this.params = {
-			...this.params,
-			...params,
-		}
-		this._requestList()
-	}
-	// form 重置
-	_resetClick = ()=>{
-		this._requestList()
-	}
 
 	render(){
 		const { 
@@ -191,7 +216,7 @@ class CurrentPage extends Component{
 			<div>
 				<Card >
 					<FilterForm formList={this.formList}
-						queryPress={this._queryClick} resetPress={this._resetClick}
+						options={this.formOptions}
 					/>
 				</Card>
 				<Card style={{marginTop: 10}}>

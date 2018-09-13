@@ -5,6 +5,12 @@
 import React from 'react'
 import { Badge, Button } from 'antd'
 
+// utils
+import { utils } from '../../utils'
+
+// const 
+import { ConstConfig } from '../../config'
+
 const dataSourceConst = [
 	{
 		id: 0,
@@ -54,7 +60,7 @@ const columnsConst = [
 		dataIndex: 'sex',
 		width: 80,
 		render(sex){
-			return sex === 1 ? '男' : '女'
+			return utils.transformSex(sex)
 		}
 	},
 	{
@@ -67,14 +73,7 @@ const columnsConst = [
 		dataIndex: 'state',
 		width: 120,
 		render(state){
-			let config = {
-				'1': '咸鱼一枚',
-				'2': '风华浪子',
-				'3': '北大才子一枚',
-				'4': '百度FE',
-				'5': '创业者',
-			}
-			return config[state]
+			return state <= ConstConfig.stateCons.length ? ConstConfig.stateCons[state-1] : ''
 		}
 	},
 	{
@@ -82,17 +81,7 @@ const columnsConst = [
 		width: 100,
 		dataIndex: 'interest',
 		render(interest){
-			let config = {
-				'1': '游泳',
-				'2': '打篮球',
-				'3': '踢足球',
-				'4': '跑步',
-				'5': '爬山',
-				'6': '骑行',
-				'7': '桌球',
-				'8': '麦霸',
-			}
-			return config[interest]
+			return interest <= ConstConfig.interestCons.length ? ConstConfig.interestCons[interest-1] : ''
 		}
 	},
 	{
@@ -130,7 +119,7 @@ const columnsLongConst = [
 		dataIndex: 'sex',
 		width: 80,
 		render(sex){
-			return sex === 1 ? '男' : '女'
+			return utils.transformSex(sex)
 		}
 	},
 	{
@@ -143,7 +132,7 @@ const columnsLongConst = [
 		dataIndex: 'isMarried',
 		width: 80,
 		render(isMarried){
-			return isMarried === 1 ? '已婚' : '未婚'
+			return utils.transformMarry(isMarried)
 		}
 	},
 	{
@@ -151,14 +140,7 @@ const columnsLongConst = [
 		dataIndex: 'state',
 		width: 120,
 		render(state){
-			let config = {
-				'1': '咸鱼一枚',
-				'2': '风华浪子',
-				'3': '北大才子一枚',
-				'4': '百度FE',
-				'5': '创业者',
-			}
-			return config[state]
+			return state <= ConstConfig.stateCons.length ? ConstConfig.stateCons[state-1] : ''
 		}
 	},
 	{
@@ -166,17 +148,7 @@ const columnsLongConst = [
 		width: 100,
 		dataIndex: 'interest',
 		render(interest){
-			let config = {
-				'1': '游泳',
-				'2': '打篮球',
-				'3': '踢足球',
-				'4': '跑步',
-				'5': '爬山',
-				'6': '骑行',
-				'7': '桌球',
-				'8': '麦霸',
-			}
-			return config[interest]
+			return interest <= ConstConfig.interestCons.length ? ConstConfig.interestCons[interest-1] : ''
 		}
 	},
 	{
@@ -231,7 +203,7 @@ const columnsSortColumns = [
 		title: '性别',
 		dataIndex: 'sex',
 		render(sex){
-			return sex === 1 ? '男' : '女'
+			return utils.transformSex(sex)
 		}
 	},
 	{
@@ -244,31 +216,14 @@ const columnsSortColumns = [
 		title: '状态',
 		dataIndex: 'state',
 		render(state){
-			let config = {
-				'1': '咸鱼一枚',
-				'2': '风华浪子',
-				'3': '北大才子一枚',
-				'4': '百度FE',
-				'5': '创业者',
-			}
-			return config[state]
+			return state <= ConstConfig.stateCons.length ? ConstConfig.stateCons[state-1] : ''
 		}
 	},
 	{
 		title: '爱好',
 		dataIndex: 'interest',
 		render(interest){
-			let config = {
-				'1': '游泳',
-				'2': '打篮球',
-				'3': '踢足球',
-				'4': '跑步',
-				'5': '爬山',
-				'6': '骑行',
-				'7': '桌球',
-				'8': '麦霸',
-			}
-			return config[interest]
+			return interest <= ConstConfig.interestCons.length ? ConstConfig.interestCons[interest-1] : ''
 		}
 	},
 	{
@@ -290,7 +245,7 @@ const columnsHandleColumns = [
 		title: '性别',
 		dataIndex: 'sex',
 		render(sex){
-			return sex === 1 ? '男' : '女'
+			return utils.transformSex(sex)
 		}
 	},
 	{
@@ -304,11 +259,11 @@ const columnsHandleColumns = [
 		dataIndex: 'state',
 		render(state){
 			let config = {
-				'1': <Badge status="default" text='咸鱼一枚'/>,
-				'2': <Badge status='error' text='风华浪子'/>,
-				'3': <Badge status='processing' text='北大才子一枚'/>,
-				'4': <Badge status='success' text='百度FE'/>,
-				'5': <Badge status='warning' text='创业者'/>,
+				'1': <Badge status="default" text={ConstConfig.stateCons[0]}/>,
+				'2': <Badge status='error' text={ConstConfig.stateCons[1]}/>,
+				'3': <Badge status='processing' text={ConstConfig.stateCons[2]}/>,
+				'4': <Badge status='success' text={ConstConfig.stateCons[3]}/>,
+				'5': <Badge status='warning' text={ConstConfig.stateCons[4]}/>,
 			}
 			return config[state]
 		}
@@ -317,17 +272,7 @@ const columnsHandleColumns = [
 		title: '爱好',
 		dataIndex: 'interest',
 		render(interest){
-			let config = {
-				'1': '游泳',
-				'2': '打篮球',
-				'3': '踢足球',
-				'4': '跑步',
-				'5': '爬山',
-				'6': '骑行',
-				'7': '桌球',
-				'8': '麦霸',
-			}
-			return config[interest]
+			return interest <= ConstConfig.interestCons.length ? ConstConfig.interestCons[interest-1] : ''
 		}
 	},
 	{

@@ -340,4 +340,15 @@
 
 
 	##
-		t0.11.1
+		t0.11.1 员工管理列表实现
+			1.FilterForm 组件复用，
+				FilterForm 如果type 是 input 类型 增加 rules
+				FilterForm  options button 做封装
+					重新配置 order list filter form options 内容
+					配置 user form options内容
+				FilterForm baseFormType 增加 date_time 类型
+			2. utils 中添加性别和婚姻状态转换方法
+			3. config 里 增加constants ,增加状态常量和兴趣常量配置
+			4.完善员工列表 页面调试
+
+		t0.11.2

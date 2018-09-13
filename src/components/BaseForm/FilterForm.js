@@ -7,7 +7,7 @@ import { Form, Select, Input, Checkbox, Button, DatePicker } from 'antd'
 import PropTypes from 'prop-types'
 
 // form config 
-import { BaseFormType } from './constants'
+import { baseFormType, optionsBtnType, } from './constants'
 
 // const 
 const FormItem = Form.Item 
@@ -15,7 +15,7 @@ const SelectOption = Select.Option
 
 class FilterForm extends Component{
 
-	// 初始化 
+	// 初始化 Form
 	_initFormList = ()=>{
 		const { formList } = this.props
 		let listCom = []
@@ -29,17 +29,41 @@ class FilterForm extends Component{
 		return listCom
 	}
 
-	_querySubmit = ()=>{
-		const {queryPress} = this.props
-		let { getFieldsValue } = this.props.form 
-		let values = getFieldsValue()
-		queryPress(values)
+	// 初始化 option btn
+	_initOptionBtn = ()=>{
+		const { options } = this.props
+		return options.map((item, index)=>{
+			const { optionItemPress} = item
+			// btnPress 改用 optionItemPress 外传 并单独处理
+			return (
+				<OptionBtn key={index} {...item}
+					btnPress={(type, code)=>{this._optionItemClick(type, code, optionItemPress)}}
+				/>
+			)
+		})
 	}
-
-	_resetForm = ()=>{
-		const {resetPress} = this.props
-		this.props.form.resetFields()
-		resetPress()
+	_optionItemClick = (type, code, pressFunc)=>{
+		const {getFieldsValue, validateFields, resetFields} = this.props.form
+		switch(type){
+			case optionsBtnType.QUERY:
+				{
+					// 查询、提交
+					let formValues = getFieldsValue()
+					validateFields((err, values)=>{
+						if(!err){
+							pressFunc(code, formValues)
+						} 
+					})
+				}
+				break
+			case optionsBtnType.RESET: 
+				{
+					// 重置
+					resetFields()
+					pressFunc(code)
+				}
+				break
+		}
 	}
 
 	render(){
@@ -47,21 +71,35 @@ class FilterForm extends Component{
 			<Form layout="inline">
 				{this._initFormList()}
 				<FormItem>
-					<Button type="primary" style={{margin: '0 20px'}} onClick={this._querySubmit}>查询</Button>
-					<Button onClick={this._resetForm}>重置</Button>
+					{this._initOptionBtn()}
 				</FormItem>
 			</Form>
 		)
 	}
 }
 
+class OptionBtn extends Component{
+	_btnClick = ()=>{
+		const {btnPress, code, type} = this.props
+		btnPress(type, code)
+	}
+	render(){
+		const { btnType = 'default', style = null, title = '' } = this.props
+		return (
+			<Button type={btnType} style={style} onClick={this._btnClick}>
+				{title}
+			</Button>
+		)
+	}
+}
+
 const FilterItem = (props)=>{
 	const {
-		type, field, label, placeholder, initialValue = '', width, list = []
+		type, field, label, placeholder, initialValue = '', width, list = [], rules = [],
 	} = props
 	let { getFieldDecorator } = props.form
 	switch(type){
-		case BaseFormType.SELECT:
+		case baseFormType.SELECT:
 			return (
 				<FormItem label={label} >
 					{
@@ -79,19 +117,20 @@ const FilterItem = (props)=>{
 					}
 				</FormItem>
 			)
-		case BaseFormType.INPUT:
+		case baseFormType.INPUT:
 			return (
 				<FormItem label={label}>
 					{
 						getFieldDecorator(field, {
-							initialValue
+							initialValue,
+							rules,
 						})(
 							<Input type="text" placeholder={placeholder} />
 						)
 					}
 				</FormItem>
 			)
-		case BaseFormType.CHECK_BOX:
+		case baseFormType.CHECK_BOX:
 			return (
 				<FormItem label={label}>
 					{
@@ -106,7 +145,7 @@ const FilterItem = (props)=>{
 					}
 				</FormItem>
 			)
-		case BaseFormType.QUERY_TIME:
+		case baseFormType.QUERY_TIME:
 			return (
 				<Fragment >
 					<FormItem label={label}>
@@ -129,6 +168,18 @@ const FilterItem = (props)=>{
 					</FormItem>
 				</Fragment>
 			)
+		case baseFormType.DATE_PICKER:
+			return (
+				<FormItem label={label}>
+					{
+						getFieldDecorator([field])(
+							<DatePicker showTime format="YYYY-MM-DD HH:mm:ss"
+								placeholder={placeholder}
+							/>
+						)
+					}
+				</FormItem>
+			)
 		default:
 			return null
 	}
@@ -136,14 +187,12 @@ const FilterItem = (props)=>{
 
 FilterForm.propTypes = {
 	formList: PropTypes.array,
-	queryPress: PropTypes.func,
-	resetPress: PropTypes.func,
+	options: PropTypes.array, // [{btnType, style, title, optionItemPress, code, type}, ...]
 }
 
 FilterForm.defaultProps = {
 	formList: [],
-	queryPress: ()=> null,
-	resetPress: ()=> null,
+	options: [],
 }
 
 export default Form.create()(FilterForm)

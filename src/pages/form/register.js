@@ -8,6 +8,8 @@ import {
 } from 'antd'
 import moment from 'moment'
 
+import { ConstConfig } from '../../config'
+
 // const 
 const FormItem = Form.Item
 const RadioGroup = Radio.Group
@@ -118,11 +120,11 @@ class FormRegister extends Component{
 									initialValue: '2'
 								})(
 									<Select>
-										<SelectOption value='1'>咸鱼一枚</SelectOption>
-										<SelectOption value='2'>风华浪子</SelectOption>
-										<SelectOption value='3'>北大才子一枚</SelectOption>
-										<SelectOption value='4'>百度FE</SelectOption>
-										<SelectOption value='5'>创业者</SelectOption>
+										<SelectOption value='1'>{ConstConfig.stateCons[0]}</SelectOption>
+										<SelectOption value='2'>{ConstConfig.stateCons[1]}</SelectOption>
+										<SelectOption value='3'>{ConstConfig.stateCons[2]}</SelectOption>
+										<SelectOption value='4'>{ConstConfig.stateCons[3]}</SelectOption>
+										<SelectOption value='5'>{ConstConfig.stateCons[4]}</SelectOption>
 									</Select>
 								)
 							}
@@ -133,14 +135,14 @@ class FormRegister extends Component{
 									initialValue: []
 								})(
 									<Select mode='multiple'>
-										<SelectOption value='1'>游泳</SelectOption>
-										<SelectOption value='2'>打篮球</SelectOption>
-										<SelectOption value='3'>踢足球</SelectOption>
-										<SelectOption value='4'>跑步</SelectOption>
-										<SelectOption value='5'>爬山</SelectOption>
-										<SelectOption value='6'>骑行</SelectOption>
-										<SelectOption value='7'>桌球</SelectOption>
-										<SelectOption value='8'>麦霸</SelectOption>
+										<SelectOption value='1'>{ConstConfig.interestCons[0]}</SelectOption>
+										<SelectOption value='2'>{ConstConfig.interestCons[1]}</SelectOption>
+										<SelectOption value='3'>{ConstConfig.interestCons[2]}</SelectOption>
+										<SelectOption value='4'>{ConstConfig.interestCons[3]}</SelectOption>
+										<SelectOption value='5'>{ConstConfig.interestCons[4]}</SelectOption>
+										<SelectOption value='6'>{ConstConfig.interestCons[5]}</SelectOption>
+										<SelectOption value='7'>{ConstConfig.interestCons[6]}</SelectOption>
+										<SelectOption value='8'>{ConstConfig.interestCons[7]}</SelectOption>
 									</Select>
 								)
 							}

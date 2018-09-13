@@ -26,6 +26,9 @@ import CityPage from './city'
 // 订单
 import { OrderListPage, OrderDetailPage, } from './order'
 
+// 员工管理
+import { UserListPage } from './user'
+
 // 404
 import NoMatchPage from './nomatch'
 
@@ -58,6 +61,8 @@ export {
 	// order
 	OrderListPage,
 	OrderDetailPage,
+	// user 
+	UserListPage,
 	// 404
 	NoMatchPage,
 }

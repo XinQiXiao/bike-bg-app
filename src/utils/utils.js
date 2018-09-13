@@ -77,6 +77,40 @@ function updateSelectedItem(target, selectedRowKeys){
 	})
 }
 
+/**
+ * 性别转换
+ * @param {number} num 
+ */
+function transformSex(num){
+	let reSex = '未知'
+	switch(num){
+		case 1:
+			reSex = '男'
+			break
+		case 2: 
+			reSex = '女'
+			break
+	}
+	return reSex
+}
+
+/**
+ * 婚否转换
+ * @param {number} num 
+ */
+function transformMarry(num){
+	let reMarry = '未知'
+	switch(num){
+		case 0:
+			reMarry = '未婚'
+			break
+		case 1: 
+			reMarry = '已婚'
+			break 
+	}
+	return reMarry
+}
+
 export default {
 	currentTimeStr,
 	pagination,
@@ -84,5 +118,7 @@ export default {
 	calculateTableWidth,
 	translateToRMB,
 	translateDistance,
+	transformSex,
+	transformMarry,
 	updateSelectedItem,
 }

@@ -23,6 +23,8 @@ import {
 	CityPage,
 	// order
 	OrderListPage, OrderDetailPage,
+	// user
+	UserListPage,
 } from '../pages'
 
 class IRouter extends Component{
@@ -53,6 +55,8 @@ class IRouter extends Component{
 								<Route path="/admin/city" component={CityPage} />
 								{/* order */}
 								<Route path="/admin/order" component={OrderListPage} />
+								{/* user list */}
+								<Route path="/admin/user" component={UserListPage} />
 								<Route component={NoMatchPage} />
 							</Switch>
 						</Admin>
