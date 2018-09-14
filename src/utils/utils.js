@@ -71,9 +71,10 @@ function translateDistance(target){
  * @param {*} selectedRowKeys 
  * @param {*} selectedItem 
  */
-function updateSelectedItem(target, selectedRowKeys){
+function updateSelectedItem(target, selectedRowKeys, selectedItems){
 	target.setState({
-		selectedRowKeys
+		selectedRowKeys,
+		selectedItems
 	})
 }
 

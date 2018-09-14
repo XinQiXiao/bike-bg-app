@@ -3,8 +3,9 @@
  */
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import moment from 'moment'
-import {Form, Input, Radio, Select, Switch, DatePicker, TimePicker} from 'antd'
+import {Form, Input, Radio, Select, Switch, DatePicker} from 'antd'
 
 // util
 import { utils } from '../../utils'
@@ -18,8 +19,9 @@ const RadioGroup = Radio.Group
 const SelectOption = Select.Option
 const TextArea = Input.TextArea
 
-class CreateForm extends Component{
+class HandleForm extends Component{
 	render(){
+		const {currentData, editAble} = this.props
 		const {getFieldDecorator} = this.props.form
 		const formItemLayout = {
 			labelCol: {
@@ -33,21 +35,23 @@ class CreateForm extends Component{
 			<Form layout="horizontal">
 				<FormItem label="姓名" {...formItemLayout}>
 					{
+						!editAble ? (currentData ? currentData['username'] : '') :
 						getFieldDecorator('username', {
-							initialValue: '',
+							initialValue: currentData ? currentData['username'] : null,
 							rules: [{
 								required: true,
 								message: '用户名不能为空'
 							}]
 						})(
 							<Input type="text" placeholder="请输入姓名"/>
-						)
+						) 
 					}
 				</FormItem>
 				<FormItem label="性别" {...formItemLayout}>
 					{
+						!editAble ? (currentData ? utils.transformSex(currentData['sex']) : '') :
 						getFieldDecorator('sex', {
-							initialValue: '1',
+							initialValue: currentData ? currentData['sex'].toString() : null,
 						})(
 							<RadioGroup>
 								<Radio value="1">{utils.transformSex(1)}</Radio>
@@ -58,8 +62,9 @@ class CreateForm extends Component{
 				</FormItem>
 				<FormItem label="手机号" {...formItemLayout}>
 					{
+						!editAble ? (currentData ? currentData['tel'] : '') :
 						getFieldDecorator('tel', {
-							initialValue: '',
+							initialValue: currentData ?  currentData['tel'] : null,
 							rules: [{
 								required: true,
 								message: '手机号不能为空'
@@ -75,8 +80,9 @@ class CreateForm extends Component{
 				</FormItem>
 				<FormItem label="状态" {...formItemLayout}>
 					{
+						!editAble ? (currentData ? ConstConfig.stateCons[currentData['state']-1] : '') :
 						getFieldDecorator('state', {
-							initialValue: '1',
+							initialValue: currentData ? currentData['state'].toString() : null,
 						})(
 							<Select>
 								<SelectOption value='1'>{ConstConfig.stateCons[0]}</SelectOption>
@@ -90,8 +96,9 @@ class CreateForm extends Component{
 				</FormItem>
 				<FormItem label="兴趣" {...formItemLayout}>
 					{
+						!editAble ? (currentData ? ConstConfig.interestCons[currentData['interest']-1] : '') :
 						getFieldDecorator('interest', {
-							initialValue: '1',
+							initialValue: currentData ? currentData['interest'].toString() : null,
 						})(
 							<Select>
 								<SelectOption value='1'>{ConstConfig.interestCons[0]}</SelectOption>
@@ -108,9 +115,10 @@ class CreateForm extends Component{
 				</FormItem>
 				<FormItem label="是否结婚" {...formItemLayout}>
 					{
+						!editAble ? (currentData ? utils.transformMarry(currentData['isMarried']) : '') :
 						getFieldDecorator('isMarried', {
 							valuePropName: 'checked',
-							initialValue: false,
+							initialValue: currentData ? Boolean(currentData['isMarried']) : false,
 						})(
 							<Switch />
 						)
@@ -118,20 +126,22 @@ class CreateForm extends Component{
 				</FormItem>
 				<FormItem label="生日" {...formItemLayout}>
 					{
+						!editAble ? (currentData ? currentData['birthday'] : '') :
 						getFieldDecorator('birthday', {
-							initialValue: moment('2018-09-13')
+							initialValue: currentData ? moment(currentData['birthday']) : null
 						})(
 							<DatePicker 
 								showTime
-								format='YYYY-MM-DD HH:mm:ss'
+								format='YYYY-MM-DD'
 							/>
 						)
 					}
 				</FormItem>
 				<FormItem label="联系地址" {...formItemLayout}>
 					{
+						!editAble ? (currentData ? currentData['address'] : '') :
 						getFieldDecorator('address', {
-							initialValue:''
+							initialValue: currentData ? currentData['address'] : null
 						})(
 							<TextArea 
 								autosize={{
@@ -143,9 +153,12 @@ class CreateForm extends Component{
 				</FormItem>
 				<FormItem label="注册时间" {...formItemLayout}>
 					{
-						getFieldDecorator('registertime')(
-							<TimePicker 
-								format='HH:mm'
+						!editAble ? (currentData ? currentData['registertime'] : '') :
+						getFieldDecorator('registertime', {
+							initialValue: currentData ? moment(currentData['registertime']) : null
+						})(
+							<DatePicker 
+								format='YYYY-MM-DD HH:mm'
 							/>
 						)
 					}
@@ -155,8 +168,20 @@ class CreateForm extends Component{
 	}
 }
 
-const CreateFormComponent = Form.create()(CreateForm)
+HandleForm.propTypes ={
+	currentData: PropTypes.object,
+	editAble: PropTypes.bool,
+	form: PropTypes.object,
+}
+
+HandleForm.defaultProps ={
+	currentData: null,
+	editAble: false,
+	form: null,
+}
+
+const HandleFormComponent = Form.create()(HandleForm)
 
 export {
-	CreateFormComponent
+	HandleFormComponent
 }

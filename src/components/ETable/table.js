@@ -9,14 +9,18 @@ import _ from 'lodash'
 class TableComponent extends Component{
 
 	_onRowClick = (record)=>{
-		let {rowSelection, selectedRowKeys, updateSelectedItem} = this.props
+		let {rowSelection, selectedRowKeys, updateSelectedItem, selectedItems} = this.props
 		if(rowSelection === 'checkbox'){
 			let eleIndex = _.isArray(selectedRowKeys) ? selectedRowKeys.indexOf(record.id) : -1
+			// selectedRowKeys 增减
 			eleIndex === -1 ? ( selectedRowKeys.push(record.id)) : (selectedRowKeys.splice(eleIndex, 1))
+			// selectedItems 增减
+			eleIndex === -1 ? ( selectedItems.push(record)) : (selectedItems.splice(eleIndex, 1))
 		} else if(rowSelection === 'radio'){
 			selectedRowKeys = [record.id]
+			selectedItems = [record]
 		}
-		updateSelectedItem(selectedRowKeys)
+		updateSelectedItem(selectedRowKeys, selectedItems)
 	}
 
 	_tableInit = ()=>{

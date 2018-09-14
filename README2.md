@@ -354,3 +354,13 @@
 		t0.11.2 创建员工功能实现
 			1.创建 operator button (operator-wrap 样式)
 			2.创建 动态模态框（创建、编辑、详情、删除公用一个）
+
+		t0.11.3 员工编辑、详情、删除功能实现
+			1.操作前，需要选择员工的做提示;
+			2. utils updateSelectedItem 方法增加 selectedItems 字段(主要是方便增删改查，看具体一条数据)
+			3. user/components HandleForm 兼容编辑模式和查看模式
+			4. Modal footer 动态隐藏和显示
+
+	## 
+		车辆地图模块
+		t0.12.1

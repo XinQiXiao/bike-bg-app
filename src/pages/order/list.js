@@ -30,6 +30,7 @@ class CurrentPage extends Component{
 		showFinishOrder: false,
 		orderFinishData: null, 
 		selectedRowKeys: [], // rowKeys 存储的即是选择 的 item ids 
+		selectedItems: [], // 选择的 list items
 	}
 
 	tableWidth = utils.calculateTableWidth(orderColumns)+60 // 'radio' width 60
@@ -126,6 +127,7 @@ class CurrentPage extends Component{
 			this.setState({
 				list: _.isArray(ret.list) ? ret.list : [],
 				selectedRowKeys: [],
+				selectedItems: [],
 				pagination: utils.pagination(ret, (current)=>{
 					_this.params.page = current
 					// 翻页请求数据
@@ -210,7 +212,7 @@ class CurrentPage extends Component{
 
 	render(){
 		const { 
-			list, pagination, showFinishOrder, orderFinishData, selectedRowKeys,
+			list, pagination, showFinishOrder, orderFinishData, selectedRowKeys, selectedItems,
 		} = this.state
 		return (
 			<div>
@@ -228,13 +230,14 @@ class CurrentPage extends Component{
 				</Card>
 				<div className="content-wrapper">
 					<ETable 
-						updateSelectedItem={(keys)=>utils.updateSelectedItem(this, keys)}
+						updateSelectedItem={(keys, items)=>utils.updateSelectedItem(this, keys, items)}
 						columns={orderColumns}
 						dataSource={list}
 						pagination={pagination}
 						rowSelection={'checkbox'}
 						scroll={{x: this.tableWidth, y: 500}}
 						selectedRowKeys={selectedRowKeys}
+						selectedItems={selectedItems}
 					/>
 				</div>
 				<Modal 

@@ -7,7 +7,7 @@ import _ from 'lodash'
 
 // components
 import { FilterForm, ETable, formConfig } from '../../components'
-import { CreateFormComponent } from './components'
+import { HandleFormComponent } from './components'
 
 // axios
 import axiosApi from '../../axios'
@@ -29,6 +29,7 @@ class UserListComponent extends Component{
 		list: [],
 		pagination: null,
 		selectedRowKeys: [], // rowKeys 存储的即是选择 的 item ids 
+		selectedItems: [], // 选择的 list items
 		modelIsVisible: false, 
 		modelTitle: '',
 		modelType: '',
@@ -111,9 +112,11 @@ class UserListComponent extends Component{
 				}
 			})
 
+			// 数据重置
 			this.setState({
 				list: _.isArray(ret.list) ? ret.list : [],
 				selectedRowKeys: [],
+				selectedItems: [],
 				pagination: utils.pagination(ret, (current)=>{
 					_this.params.page = current
 					// 翻页请求数据
@@ -126,16 +129,32 @@ class UserListComponent extends Component{
 	}
 
 	_handleOperatorClick = (code)=>{
-		let title = code === OPE_ADD ? '创建员工' : (
-			code === OPE_EDIT ? '编辑员工' : (
-				code === OPE_INFO ? '员工详情' : '删除员工'
+		const { selectedRowKeys } = this.state
+		if((code === OPE_EDIT || code === OPE_INFO || code === OPE_DEL) && selectedRowKeys.length<1){
+			message.warn('请选择一个员工')
+			return
+		}
+		if(code !== OPE_DEL){
+			// 添加、编辑、详情
+			let title = code === OPE_ADD ? '创建员工' : (
+				code === OPE_EDIT ? '编辑员工' : (
+					code === OPE_INFO ? '员工详情' : ''
+				)
 			)
-		)
-		this.setState({
-			modelType: code,
-			modelTitle: title,
-			modelIsVisible: true
-		})
+			this.setState({
+				modelType: code,
+				modelTitle: title,
+				modelIsVisible: true
+			})
+		} else {
+			// 移除
+			Modal.confirm({
+				title: '确认移除',
+				content: '是否要移除当前选中的员工',
+				onOk: this._handleRemoveQuery,
+				onCancel:()=> null
+			})
+		}
 	}
 	_hideModal = ()=>{
 		const {resetFields} = this.modelForm.props.form
@@ -147,15 +166,19 @@ class UserListComponent extends Component{
 			modelIsVisible: false
 		})
 	}
-	_modelSubmit = (code)=>{
+	_modelSubmit = ()=>{
+		const { modelType, selectedRowKeys } = this.state
+		// 添加和修改
 		const {getFieldsValue, validateFields, resetFields} = this.modelForm.props.form
 		let modelValues = getFieldsValue()
+		// 修改时要提交修改的 员工 id
+		modelType === OPE_EDIT ? modelValues.id = selectedRowKeys[0] : null
 		validateFields((err, values)=>{
 			if(!err){
 				modelValues = {
 					...modelValues,
-					birthday: modelValues.birthday.format('YYYY-MM-DD'),
-					registertime: modelValues.registertime.format('HH:mm')
+					birthday: modelValues.birthday ? modelValues.birthday.format('YYYY-MM-DD') : '',
+					registertime: modelValues.registertime ? modelValues.registertime.format('YYYY-MM-DD HH:mm') : ''
 				}
 				// 重置 model form
 				resetFields()
@@ -166,8 +189,10 @@ class UserListComponent extends Component{
 	}
 	_handleSubmitQuery = async (values)=>{
 		try{
+			const { modelType } = this.state
+			let curUrl = modelType === OPE_ADD ? 'user/add' : ( modelType === OPE_EDIT ? 'user/edit' : '' )
 			const ret = await axiosApi.ajax({
-				url: 'user/add',
+				url: curUrl ,
 				data: {
 					isShowLoading: true,
 					params: values
@@ -184,11 +209,38 @@ class UserListComponent extends Component{
 			message.error('提交失败')
 		}
 	}
+	_handleRemoveQuery = async ()=>{
+		try{
+			const {selectedRowKeys} = this.state
+			const ret = await axiosApi.ajax({
+				url: 'user/remove' ,
+				data: {
+					isShowLoading: true,
+					params: selectedRowKeys[0]
+				}
+			})
+			if(ret.success){
+				await this._requestList()
+				message.success(ret.result)
+			} else {
+				throw new Error('_handleSubmitQuery fail')
+			}
+		}catch(e){
+			message.error('移除失败')
+		}
+	} 
 
 	render(){
 		const { 
-			list, pagination, selectedRowKeys, modelIsVisible, modelTitle, modelType
+			list, pagination, selectedRowKeys, selectedItems, 
+			modelIsVisible, modelTitle, modelType,
 		} = this.state
+		let footer = {}
+		if(modelType === OPE_INFO){
+			footer = {
+				footer: null
+			}
+		}
 		return (
 			<div>
 				<Card>
@@ -206,11 +258,11 @@ class UserListComponent extends Component{
 					>员工详情</Button>
 					<Button style={{color: '#f00'}} icon="delete"
 						onClick={()=> this._handleOperatorClick(OPE_DEL)}
-					>删除员工</Button>
+					>移除员工</Button>
 				</Card>
 				<div className="content-wrapper">
 					<ETable 
-						updateSelectedItem={(keys)=>utils.updateSelectedItem(this, keys)}
+						updateSelectedItem={(keys, items)=>utils.updateSelectedItem(this, keys, items)}
 						columns={userColumns}
 						dataSource={list}
 						pagination={pagination}
@@ -223,9 +275,12 @@ class UserListComponent extends Component{
 					title={modelTitle}
 					visible={modelIsVisible}
 					onCancel={this._hideModal}
-					onOk={()=> this._modelSubmit(modelType)}
+					onOk={()=> this._modelSubmit()}
+					{...footer}
 				>
-					<CreateFormComponent type={modelType} 
+					<HandleFormComponent  
+						editAble={(modelType === OPE_ADD || modelType === OPE_EDIT) ? true : false}
+						currentData={selectedItems.length>0 ? selectedItems[0] : null}
 						wrappedComponentRef={(form)=> this.modelForm = form}
 					/>
 				</Modal>
