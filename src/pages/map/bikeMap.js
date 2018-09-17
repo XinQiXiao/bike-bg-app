@@ -127,6 +127,8 @@ class BikeMap extends Component{
 			this._drawBikeRoute(route_list)
 			// 添加服务区
 			this._drawServerArea(service_list)
+			//
+			this._drawBikeDistribution(bike_list)
 		} catch(e){
 			console.log('_renderMap e=>', e)
 		}
@@ -156,7 +158,7 @@ class BikeMap extends Component{
 			startPoint = new window.BMap.Point(firstPosition.lon, firstPosition.lat)
 			let startIcon = new window.BMap.Icon('/assets/start_point.png', new window.BMap.Size(36, 42), {
 				imageSize: new window.BMap.Size(36, 42),
-				anchor: new window.BMap.Size(36, 42),
+				anchor: new window.BMap.Size(18, 42),
 			})
 			let startMarker = new window.BMap.Marker(startPoint, {icon: startIcon})
 			this.map.addOverlay(startMarker)
@@ -166,7 +168,7 @@ class BikeMap extends Component{
 			endPoint = new window.BMap.Point(lastPosition.lon, lastPosition.lat)
 			let endIcon = new window.BMap.Icon('/assets/end_point.png', new window.BMap.Size(36, 42), {
 				imageSize: new window.BMap.Size(36, 42),
-				anchor: new window.BMap.Size(36, 42),
+				anchor: new window.BMap.Size(18, 42),
 			})
 			let endMarker = new window.BMap.Marker(endPoint, {icon: endIcon})
 			this.map.addOverlay(endMarker)
@@ -177,7 +179,7 @@ class BikeMap extends Component{
 				trackPoint.push(new window.BMap.Point(item.lon, item.lat))
 			})
 			let polylines = new window.BMap.Polyline(trackPoint, {
-				strokeColor: '#1869AD', strokeWeight: 3, strokeOpacity: 1.0
+				strokeColor: '#4136EF', strokeWeight: 2, strokeOpacity: 1.0
 			})
 			this.map.addOverlay(polylines)
 
@@ -195,11 +197,32 @@ class BikeMap extends Component{
 				trackPoint.push(new window.BMap.Point(item.lon, item.lat))
 			})
 			let polylines = new window.BMap.Polygon(trackPoint, {
-				strokeColor: '#CE0000', strokeWeight: 4, strokeOpacity: 1.0, 
+				strokeColor: '#EF4136', strokeWeight: 3, strokeOpacity: 1.0, 
 				fillColor: '#FF8605', fillOpacity: 0.3
 			})
 			this.map.addOverlay(polylines)
 		}
+	}
+	// 绘制车辆分布情况
+	_drawBikeDistribution = (list)=>{
+		let bikeList = []
+		list.forEach((item)=>{
+			let bikeArr = item.split(',')
+			bikeList.push({
+				lon: bikeArr[0],
+				lat: bikeArr[1]
+			})
+		})
+		bikeList.forEach((item)=>{
+			// 起始 坐标 、icon, 坐标依赖marker
+			let bikePoint = new window.BMap.Point(item.lon, item.lat)
+			let bikeIcon = new window.BMap.Icon('/assets/bike.jpg', new window.BMap.Size(36, 42), {
+				imageSize: new window.BMap.Size(36, 42),
+				anchor: new window.BMap.Size(18, 42),
+			})
+			let bikeMarker = new window.BMap.Marker(bikePoint, {icon: bikeIcon})
+			this.map.addOverlay(bikeMarker)
+		})
 	}
 
 	render(){
