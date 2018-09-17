@@ -29,6 +29,9 @@ import { OrderListPage, OrderDetailPage, } from './order'
 // 员工管理
 import { UserListPage } from './user'
 
+// 车辆地图
+import { BikeMapPage } from './map'
+
 // 404
 import NoMatchPage from './nomatch'
 
@@ -63,6 +66,8 @@ export {
 	OrderDetailPage,
 	// user 
 	UserListPage,
+	// bike map 
+	BikeMapPage,
 	// 404
 	NoMatchPage,
 }

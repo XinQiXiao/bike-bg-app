@@ -25,6 +25,8 @@ import {
 	OrderListPage, OrderDetailPage,
 	// user
 	UserListPage,
+	// bike map 
+	BikeMapPage,
 } from '../pages'
 
 class IRouter extends Component{
@@ -57,6 +59,8 @@ class IRouter extends Component{
 								<Route path="/admin/order" component={OrderListPage} />
 								{/* user list */}
 								<Route path="/admin/user" component={UserListPage} />
+								{/* bike map */}
+								<Route path="/admin/bikeMap" component={BikeMapPage} />
 								<Route component={NoMatchPage} />
 							</Switch>
 						</Admin>
