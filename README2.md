@@ -375,3 +375,15 @@
 
 	## 
 		图标模块开发
+		t0.13.1 图标基础知识介绍
+			1.ECharts讲解
+				Echarts 掌握
+					a.看Demo
+					b.看配置项
+					c.主题，包括自定义主题，主题色
+			2.项目里需要下载的 Echarts组件
+				echarts && echarts-for-react 
+			3.安装插件
+
+		t0.13.2 柱状图功能实现
+		
