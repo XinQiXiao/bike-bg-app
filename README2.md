@@ -386,4 +386,9 @@
 			3.安装插件
 
 		t0.13.2 柱状图功能实现
+			1.charts 各个page 页面创建
+			2.echarts 按需加载
+			3.加入echarts 主题, 导入主题; 导入echarts-for-react
+			4. 编码
 		
+		t0.13.3 饼形图功能实现1

@@ -32,6 +32,9 @@ import { UserListPage } from './user'
 // 车辆地图
 import { BikeMapPage } from './map'
 
+// charts
+import { BarPage, PiePage, LinePage } from './echarts'
+
 // 404
 import NoMatchPage from './nomatch'
 
@@ -68,6 +71,10 @@ export {
 	UserListPage,
 	// bike map 
 	BikeMapPage,
+	// charts
+	BarPage,
+	PiePage,
+	LinePage,
 	// 404
 	NoMatchPage,
 }
