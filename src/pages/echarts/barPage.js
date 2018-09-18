@@ -42,7 +42,7 @@ class BarPage extends Component{
 			},
 			series: [
 				{
-					name: '',
+					name: '订单量',
 					type: 'bar',
 					data: [1000, 900, 800, 1100, 1200, 2000, 1900]
 				}

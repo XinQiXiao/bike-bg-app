@@ -392,3 +392,7 @@
 			4. 编码
 		
 		t0.13.3 饼形图功能实现1
+			1.option 参数配置
+				http://www.echartsjs.com/
+				文档 API 配置项
+			2.修改主题色
