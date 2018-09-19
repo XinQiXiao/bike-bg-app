@@ -31,6 +31,8 @@ import {
 	BarPage, PiePage, LinePage,
 	// rich
 	RichPage,
+	// permisson
+	PermissonPage,
 } from '../pages'
 
 class IRouter extends Component{
@@ -71,6 +73,8 @@ class IRouter extends Component{
 								<Route path="/admin/charts/line" component={LinePage} />
 								{/* rich */}
 								<Route path="/admin/rich" component={RichPage} />
+								{/* permisson */}
+								<Route path="/admin/permission" component={PermissonPage} />
 								<Route component={NoMatchPage} />
 							</Switch>
 						</Admin>

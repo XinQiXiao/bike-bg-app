@@ -38,6 +38,9 @@ import { BarPage, PiePage, LinePage } from './echarts'
 // 富文本
 import { RichPage } from './rich'
 
+// 权限设置
+import { PermissonPage } from './permission'
+
 // 404
 import NoMatchPage from './nomatch'
 
@@ -80,6 +83,8 @@ export {
 	LinePage,
 	// 富文本
 	RichPage,
+	// 权限设置
+	PermissonPage,
 	// 404
 	NoMatchPage,
 }
