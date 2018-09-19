@@ -14,13 +14,13 @@ import 'echarts/lib/component/title'
 import 'echarts/lib/component/legend'
 import 'echarts/lib/component/markPoint'
 // echarts 主题
-import { echartTheme } from '../../config'
+import { echartThemeLight } from '../../config'
 
 class PiePage extends Component{
 
 	componentWillMount(){
 		// 注入主题
-		echarts.registerTheme('Imooc', echartTheme)
+		echarts.registerTheme('Imooc', echartThemeLight)
 	}
 
 	_getOption = ()=>{
@@ -118,7 +118,7 @@ class PiePage extends Component{
 				{
 					name: '订单量',
 					type: 'pie',
-					radius: ['50%', '70%'],
+					roseType: 'radius',
 					data: [
 						{value: 1000, name: 'Mon'},
 						{value: 900, name: 'Tue'},
@@ -127,7 +127,12 @@ class PiePage extends Component{
 						{value: 1200, name: 'Fri'},
 						{value: 2000, name: 'Sat'},
 						{value: 1900, name: 'Sun'},
-					]
+					].sort((a, b)=> a.value-b.value),
+					animationType: 'scale',
+					animationEasing: 'elasticOut',
+					animationDelay: function (idx) {
+							return Math.random() * 200;
+					}
 				}
 			]
 		}
