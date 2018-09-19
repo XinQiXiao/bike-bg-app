@@ -35,6 +35,9 @@ import { BikeMapPage } from './map'
 // charts
 import { BarPage, PiePage, LinePage } from './echarts'
 
+// 富文本
+import { RichPage } from './rich'
+
 // 404
 import NoMatchPage from './nomatch'
 
@@ -75,6 +78,8 @@ export {
 	BarPage,
 	PiePage,
 	LinePage,
+	// 富文本
+	RichPage,
 	// 404
 	NoMatchPage,
 }

@@ -410,3 +410,10 @@
 				c.带面积
 
 		t0.13.6 富文本功能实现
+				富文本插件 react-draft-wysiwyg url:https://github.com/jpuri/react-draft-wysiwyg.git
+				富文本转html draftjs-to-html url:https://github.com/jpuri/draftjs-to-html.git
+				1.安装依赖 yarn add react-draft-wysiwyg draftjs-to-html
+
+		
+	## 
+		权限设置 和功能列表实现

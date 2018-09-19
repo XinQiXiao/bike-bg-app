@@ -29,6 +29,8 @@ import {
 	BikeMapPage,
 	// charts
 	BarPage, PiePage, LinePage,
+	// rich
+	RichPage,
 } from '../pages'
 
 class IRouter extends Component{
@@ -67,6 +69,8 @@ class IRouter extends Component{
 								<Route path="/admin/charts/bar" component={BarPage} />
 								<Route path="/admin/charts/pie" component={PiePage} />
 								<Route path="/admin/charts/line" component={LinePage} />
+								{/* rich */}
+								<Route path="/admin/rich" component={RichPage} />
 								<Route component={NoMatchPage} />
 							</Switch>
 						</Admin>
