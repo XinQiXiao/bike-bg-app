@@ -95,12 +95,12 @@ class BarPage extends Component{
 	render(){
 		return (
 			<div>
-				<Card title="柱形图标一">
+				<Card title="柱形图一">
 					<ReactEcharts option={this._getOption()} theme="Imooc"
 						style={{height: 500}}
 					/>
 				</Card>
-				<Card title="柱形图标二" style={{marginTop: 10}}>
+				<Card title="柱形图二" style={{marginTop: 10}}>
 					<ReactEcharts option={this._getOption2()} theme="Imooc"
 						style={{height: 500}}
 					/>

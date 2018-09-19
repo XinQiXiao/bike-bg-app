@@ -142,17 +142,17 @@ class PiePage extends Component{
 	render(){
 		return (
 			<div>
-				<Card title="饼形图标一">
+				<Card title="饼形图一">
 				<ReactEcharts option={this._getOption()} theme="Imooc"
 					style={{height: 500}}
 				/>
 				</Card>
-				<Card title="饼形图标二" style={{marginTop: 10}}>
+				<Card title="饼形图二" style={{marginTop: 10}}>
 					<ReactEcharts option={this._getOption2()} theme="Imooc"
 						style={{height: 500}}
 					/>
 				</Card>
-				<Card title="饼形图标三" style={{marginTop: 10}}>
+				<Card title="饼形图三" style={{marginTop: 10}}>
 					<ReactEcharts option={this._getOption3()} theme="Imooc"
 						style={{height: 500}}
 					/>
