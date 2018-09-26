@@ -2,11 +2,12 @@
  * create at 09/19/18
  */
 import React, { Component } from 'react'
-import { Card, Button, message } from 'antd'
+import { Card, Button, message, Modal } from 'antd'
 import _ from 'lodash'
 
 // components
 import { ETable } from '../../components'
+import { HandleRoleComponent } from './components'
 
 // axios
 import axiosApi from '../../axios'
@@ -27,7 +28,12 @@ class CurrentPage extends Component{
 		pagination: null,
 		selectedRowKeys: [], // rowKeys 存储的即是选择 的 item ids 
 		selectedItems: [], // 选择的 list items
+		modalTitle: '',
+		modalVisible: false,
+		modalType: '',
 	}
+
+	modelForm = null
 
 	params = {
 		page: 1
@@ -68,14 +74,87 @@ class CurrentPage extends Component{
 
 	_btnClick = (code)=>{
 		const {selectedRowKeys} = this.state
-		if(code === SETTING || code === AUTH ){
-			selectedRowKeys.length > 0 ? null : message.info('请选择一个员工')
+		if((code === SETTING || code === AUTH) && selectedRowKeys.length === 0 ){
+			message.info('请选择一个员工')
+			return
+		}
+		let curTitle = ''
+		switch(code){
+			case CREATE:
+				curTitle = '创建角色'
+				break
+			case SETTING:
+				curTitle = '设置权限'
+				break
+			case AUTH:
+				curTitle = '用户授权'
+				break
+		}
+		this.setState({
+			modalTitle: curTitle,
+			modalVisible: true,
+			modalType: code
+		})
+	}
+
+	// modal
+	_hideModal = ()=>{
+		const {resetFields} = this.modelForm.props.form
+		// 重置 model form
+		resetFields()
+		this.setState({
+			modalTitle: '',
+			modalType: '',
+			modalVisible: false
+		})
+	}
+	_modalSubmit = ()=>{
+		const { modelType, selectedRowKeys } = this.state
+		const {getFieldsValue, validateFields, resetFields} = this.modelForm.props.form
+		let modelValues = getFieldsValue()
+		validateFields((err, values)=>{
+			if(!err){
+				// 重置 model form
+				resetFields()
+				this._hideModal()
+				this._handleSubmitQuery(modelValues)
+			}
+		})
+	}
+	_handleSubmitQuery = async (values)=>{
+		let failMsg = ''
+		try{
+			const {modalType} = this.state
+			let curUrl
+			if(modalType === CREATE){
+				curUrl = 'role/create'
+				failMsg = '创建角色'
+			} else if(modalType === SETTING){
+				curUrl = 'role/edit'
+				failMsg = '设置权限'
+			} else {
+				curUrl = ''
+				failMsg = '用户授权'
+			}
+			const ret = await axiosApi.ajax({
+				url: curUrl,
+				data: {
+					isShowLoading: true,
+					params: values
+				}
+			})
+			message.success(ret.message)
+			this._requestList()
+		}catch(e){
+			console.log('_handleSubmitQuery e=>', e)
+			message.error(`${failMsg}失败`)
 		}
 	}
 
 	render(){
 		const { 
 			list, pagination, selectedRowKeys, 
+			modalTitle, modalVisible, modalType,
 		} = this.state
 		return (
 			<div>
@@ -101,6 +180,14 @@ class CurrentPage extends Component{
 						/>
 					</div>
 				</Card>
+				<Modal title={modalTitle} visible={modalVisible}
+					onCancel={this._hideModal}
+					onOk={this._modalSubmit}
+				>
+					<HandleRoleComponent 
+						wrappedComponentRef={(form)=> this.modelForm = form}
+					/>
+				</Modal>
 			</div>
 		)
 	}
