@@ -3,14 +3,34 @@
  */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import {Form, Input, Select} from 'antd'
+import {Form, Input, Select, Tree} from 'antd'
+
+// config
+import { MenuConfig } from '../../config'
 
 // const 
 const FormItem = Form.Item
 const SelectOption = Select.Option
+const TreeNode = Tree.TreeNode
 
-class RoleForm extends Component{
+class FormComponent extends Component{
+
+	_renderTreeNodes = (nodes)=>{
+		return nodes.map((item, idx)=>{
+			if(item.children){
+				return (
+					<TreeNode title={item.title} key={item.key}>
+						{this._renderTreeNodes(item.children)}
+					</TreeNode>
+				)
+			} else {
+				return <TreeNode title={item.title} key={item.key}/>
+			}
+		})
+	}
+
 	render(){
+		const { editRoleName, currentData, showTree } = this.props
 		const {getFieldDecorator} = this.props.form
 		const formItemLayout = {
 			labelCol: {
@@ -25,20 +45,22 @@ class RoleForm extends Component{
 				<FormItem label="角色名" {...formItemLayout}>
 					{
 						getFieldDecorator('role_name', {
-							initialValue: '',
+							initialValue: currentData && currentData.role_name ? currentData.role_name : '',
 							rules: [{
 								required: true,
 								message: '角色名不能为空'
 							}]
 						})(
-							<Input type="text" placeholder="请输入角色名称"/>
+							<Input type="text" placeholder="请输入角色名称"
+								disabled={editRoleName}
+							/>
 						) 
 					}
 				</FormItem>
 				<FormItem label="状态" {...formItemLayout}>
 					{
-						getFieldDecorator('state', {
-							initialValue: 1,
+						getFieldDecorator('status', {
+							initialValue: currentData && currentData.status ? currentData.status : 1,
 						})(
 							<Select>
 								<SelectOption value={0}>停用</SelectOption>
@@ -47,21 +69,38 @@ class RoleForm extends Component{
 						)
 					}
 				</FormItem>
+				{
+					showTree ? (
+						<Tree 
+							checkable
+						>
+							<TreeNode title="平台权限" key="platform_all">
+								{this._renderTreeNodes(MenuConfig)}
+							</TreeNode>
+						</Tree>
+					) : null
+				}
 			</Form>
 		)
 	}
 }
 
-RoleForm.propTypes ={
+FormComponent.propTypes = {
+	currentData: PropTypes.object,
+	editRoleName: PropTypes.bool,
+	showTree: PropTypes.bool,
 	form: PropTypes.object,
 }
 
-RoleForm.defaultProps ={
+FormComponent.defaultProps = {
+	currentData: null,
+	editRoleName: false,
+	showTree: false,
 	form: null,
 }
 
-const HandleRoleComponent = Form.create()(RoleForm)
+const HandleFormComponent = Form.create()(FormComponent)
 
 export {
-	HandleRoleComponent
+	HandleFormComponent,
 }

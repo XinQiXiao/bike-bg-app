@@ -7,7 +7,7 @@ import _ from 'lodash'
 
 // components
 import { ETable } from '../../components'
-import { HandleRoleComponent } from './components'
+import { HandleFormComponent, } from './components'
 
 // axios
 import axiosApi from '../../axios'
@@ -75,7 +75,7 @@ class CurrentPage extends Component{
 	_btnClick = (code)=>{
 		const {selectedRowKeys} = this.state
 		if((code === SETTING || code === AUTH) && selectedRowKeys.length === 0 ){
-			message.info('请选择一个员工')
+			message.info('请选择一个角色')
 			return
 		}
 		let curTitle = ''
@@ -153,9 +153,10 @@ class CurrentPage extends Component{
 
 	render(){
 		const { 
-			list, pagination, selectedRowKeys, 
+			list, pagination, selectedRowKeys, selectedItems,
 			modalTitle, modalVisible, modalType,
 		} = this.state
+		let curData = (_.isArray(selectedItems) && selectedItems.length > 0) ? selectedItems[0] : null
 		return (
 			<div>
 				<Card>
@@ -184,7 +185,10 @@ class CurrentPage extends Component{
 					onCancel={this._hideModal}
 					onOk={this._modalSubmit}
 				>
-					<HandleRoleComponent 
+					<HandleFormComponent 
+						currentData={modalType === SETTING ? curData : null}
+						editRoleName={modalType === SETTING}
+						showTree={modalType === SETTING}
 						wrappedComponentRef={(form)=> this.modelForm = form}
 					/>
 				</Modal>
