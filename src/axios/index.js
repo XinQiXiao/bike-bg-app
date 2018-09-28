@@ -36,6 +36,8 @@ class Axios{
 		if(options.isMock){
 			// 是mock数据，还是正式数据
 		}
+		// 打印 params
+		console.log('axios ajax request url=>', options.url, ' params=>',options.data.params)
 		return new Promise((resolve, reject)=>{
 			axios({
 				url: options.url,

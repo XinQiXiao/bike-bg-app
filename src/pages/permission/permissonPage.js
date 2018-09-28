@@ -89,6 +89,8 @@ class CurrentPage extends Component{
 			case AUTH:
 				curTitle = '用户授权'
 				break
+			default:
+				break
 		}
 		this.setState({
 			modalTitle: curTitle,
@@ -109,11 +111,19 @@ class CurrentPage extends Component{
 		})
 	}
 	_modalSubmit = ()=>{
-		const { modelType, selectedRowKeys } = this.state
+		const { modalType, selectedRowKeys, selectedItems } = this.state
 		const {getFieldsValue, validateFields, resetFields} = this.modelForm.props.form
 		let modelValues = getFieldsValue()
 		validateFields((err, values)=>{
 			if(!err){
+				// 设置权限 情况 modelValues 需要补充 修改的 item menus内容
+				if(modalType === SETTING ){
+					modelValues = {
+						...modelValues,
+						menus: (_.isArray(selectedItems) && selectedItems.length>0) ? selectedItems[0].menus : [],
+						role_id: (_.isArray(selectedRowKeys) && selectedRowKeys.length>0) ? selectedRowKeys[0] : null
+					}
+				} 
 				// 重置 model form
 				resetFields()
 				this._hideModal()
@@ -148,6 +158,23 @@ class CurrentPage extends Component{
 		}catch(e){
 			console.log('_handleSubmitQuery e=>', e)
 			message.error(`${failMsg}失败`)
+		}
+	}
+
+	// 更新 设置权限 复选框选择内容
+	_updateCheckKeys = (keys)=>{
+		const {selectedItems} = this.state
+		if(_.isArray(selectedItems) && selectedItems.length > 0){
+			let newSelItems = [] 
+			selectedItems.forEach((item, idx)=>{
+				if(idx===0){
+					item.menus = keys
+				}
+				newSelItems.push(item)
+			})
+			this.setState({
+				selectedItems: newSelItems
+			})
 		}
 	}
 
@@ -190,6 +217,7 @@ class CurrentPage extends Component{
 						editRoleName={modalType === SETTING}
 						showTree={modalType === SETTING}
 						wrappedComponentRef={(form)=> this.modelForm = form}
+						updateCheckKeys={this._updateCheckKeys}
 					/>
 				</Modal>
 			</div>

@@ -4,6 +4,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {Form, Input, Select, Tree} from 'antd'
+import _ from 'lodash'
 
 // config
 import { MenuConfig } from '../../config'
@@ -27,6 +28,11 @@ class FormComponent extends Component{
 				return <TreeNode title={item.title} key={item.key}/>
 			}
 		})
+	}
+
+	_treeOnCheck = (checkedKeys)=>{
+		const { updateCheckKeys } = this.props
+		updateCheckKeys(checkedKeys)
 	}
 
 	render(){
@@ -73,6 +79,9 @@ class FormComponent extends Component{
 					showTree ? (
 						<Tree 
 							checkable
+							defaultExpandAll
+							onCheck={this._treeOnCheck}
+							checkedKeys={_.isArray(currentData.menus) ? currentData.menus : []}
 						>
 							<TreeNode title="平台权限" key="platform_all">
 								{this._renderTreeNodes(MenuConfig)}
@@ -90,6 +99,7 @@ FormComponent.propTypes = {
 	editRoleName: PropTypes.bool,
 	showTree: PropTypes.bool,
 	form: PropTypes.object,
+	updateCheckKeys: PropTypes.func,
 }
 
 FormComponent.defaultProps = {
@@ -97,6 +107,7 @@ FormComponent.defaultProps = {
 	editRoleName: false,
 	showTree: false,
 	form: null,
+	updateCheckKeys: ()=> null,
 }
 
 const HandleFormComponent = Form.create()(FormComponent)

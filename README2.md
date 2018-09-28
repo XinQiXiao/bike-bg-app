@@ -435,3 +435,7 @@
 
 		t0.14.4 权限设置功能实现2
 			1.Tree 属性
+			2. onCheck/defaultExpandAll/checkable/checkedKeys 属性 
+			3. checkedKeys 动态更新 form组件联动 page
+
+		t0.14.5 菜单结构调整
