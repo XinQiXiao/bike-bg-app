@@ -439,3 +439,9 @@
 			3. checkedKeys 动态更新 form组件联动 page
 
 		t0.14.5 菜单结构调整
+			精简菜单
+			exact 精准匹配
+			和 Switch 组件 只匹配一个
+			"/" 访问首页 通过 Redirect重定向
+
+		t0.14.6 用户授权1

@@ -2,9 +2,9 @@
  * create at 07/24/18
  */
 import React, { Component } from 'react'
-import { HashRouter, Route, Switch } from 'react-router-dom'
+import { HashRouter, Route, Switch, Redirect, } from 'react-router-dom'
 
-// app admin
+// app 
 import App from './App'
 import Admin from './AdminRoute'
 import Common from './CommonRoute'
@@ -12,6 +12,7 @@ import Common from './CommonRoute'
 // router
 import { 
 	Login, NoMatchPage,
+	HomePage,
 	// UI
 	ButtonPage, ModalPage, LoadingPage, NotificationPage, MessagePage, 
 	TabsPage, GallaryPage, CarouselPage,
@@ -40,53 +41,57 @@ class IRouter extends Component{
 		return(
 			<HashRouter>
 				<App>
-					<Route path="/login" component={Login} />
-					<Route path="/admin" render={() => 
-						<Admin>
-							<Switch>
-								{/* UI */}
-								<Route path="/admin/ui/buttons" component={ButtonPage} />
-								<Route path="/admin/ui/modals" component={ModalPage} />
-								<Route path="/admin/ui/loadings" component={LoadingPage} />
-								<Route path="/admin/ui/notification" component={NotificationPage} />
-								<Route path="/admin/ui/messages" component={MessagePage} />
-								<Route path="/admin/ui/tabs" component={TabsPage} />
-								<Route path="/admin/ui/gallery" component={GallaryPage} />
-								<Route path="/admin/ui/carousel" component={CarouselPage} />
-								{/* Form */}
-								<Route path="/admin/form/login" component={FormLogin} />
-								<Route path="/admin/form/reg" component={FormRegister} />
-								{/* Table */}
-								<Route path="/admin/table/basic" component={BasicTablePage} />
-								<Route path="/admin/table/high" component={HighTablePage} />
-								{/* City */}
-								<Route path="/admin/city" component={CityPage} />
-								{/* order */}
-								<Route path="/admin/order" component={OrderListPage} />
-								{/* user list */}
-								<Route path="/admin/user" component={UserListPage} />
-								{/* bike map */}
-								<Route path="/admin/bikeMap" component={BikeMapPage} />
-								{/* charts */}
-								<Route path="/admin/charts/bar" component={BarPage} />
-								<Route path="/admin/charts/pie" component={PiePage} />
-								<Route path="/admin/charts/line" component={LinePage} />
-								{/* rich */}
-								<Route path="/admin/rich" component={RichPage} />
-								{/* permisson */}
-								<Route path="/admin/permission" component={PermissonPage} />
-								<Route component={NoMatchPage} />
-							</Switch>
-						</Admin>
-					} />
-					<Route path="/common" render={()=> 
-						<Common>
-							<Switch>
-								{/* order detail */}
-								<Route path="/common/order/detail/:orderId" component={OrderDetailPage}/>
-							</Switch>
-						</Common>	
-					} />
+					<Switch>
+						<Route path="/login" component={Login} />
+						<Route path="/common" render={()=> 
+							<Common>
+								<Switch>
+									{/* order detail */}
+									<Route path="/common/order/detail/:orderId" component={OrderDetailPage}/>
+								</Switch>
+							</Common>	
+						} />
+						<Route path="/" render={() => 
+							<Admin>
+								<Switch>
+									<Route path="/home" component={HomePage} />
+									{/* UI */}
+									<Route path="/ui/buttons" component={ButtonPage} />
+									<Route path="/ui/modals" component={ModalPage} />
+									<Route path="/ui/loadings" component={LoadingPage} />
+									<Route path="/ui/notification" component={NotificationPage} />
+									<Route path="/ui/messages" component={MessagePage} />
+									<Route path="/ui/tabs" component={TabsPage} />
+									<Route path="/ui/gallery" component={GallaryPage} />
+									<Route path="/ui/carousel" component={CarouselPage} />
+									{/* Form */}
+									<Route path="/form/login" component={FormLogin} />
+									<Route path="/form/reg" component={FormRegister} />
+									{/* Table */}
+									<Route path="/table/basic" component={BasicTablePage} />
+									<Route path="/table/high" component={HighTablePage} />
+									{/* City */}
+									<Route path="/city" component={CityPage} />
+									{/* order */}
+									<Route path="/order" component={OrderListPage} />
+									{/* user list */}
+									<Route path="/user" component={UserListPage} />
+									{/* bike map */}
+									<Route path="/bikeMap" component={BikeMapPage} />
+									{/* charts */}
+									<Route path="/charts/bar" component={BarPage} />
+									<Route path="/charts/pie" component={PiePage} />
+									<Route path="/charts/line" component={LinePage} />
+									{/* rich */}
+									<Route path="/rich" component={RichPage} />
+									{/* permisson */}
+									<Route path="/permission" component={PermissonPage} />
+									<Redirect to="/home"/>
+									<Route component={NoMatchPage} />
+								</Switch>
+							</Admin>
+						} />
+					</Switch>
 				</App>
 			</HashRouter>
 		)

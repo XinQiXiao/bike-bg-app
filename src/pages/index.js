@@ -8,6 +8,9 @@ import { HomeRoute, RouterPage, RouterPage3 } from './router_demo'
 // login
 import Login from './login'
 
+// home
+import HomePage from './home'
+
 // ui 
 import { 
 	ButtonPage, ModalPage, LoadingPage, NotificationPage, MessagePage, 
@@ -53,6 +56,8 @@ export {
 	RouterPage3,
 	// login
 	Login,
+	// home
+	HomePage,
 	// ui
 	ButtonPage,
 	ModalPage,
