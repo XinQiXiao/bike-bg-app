@@ -31,9 +31,12 @@ class CurrentPage extends Component{
 		modalTitle: '',
 		modalVisible: false,
 		modalType: '',
+		curMockData: [], // 当前选中的角色 需要授权的用户列表
+		curTargetKeys: [], // 当前选中的角色 已经授权的用户列表
 	}
 
 	modelForm = null
+	curUserList = [] // 当前选中的角色 所有用户列表
 
 	params = {
 		page: 1
@@ -69,10 +72,11 @@ class CurrentPage extends Component{
 			})
 		}catch(e){
 			console.log('_requestList e=>', e)
+			message.error('请求角色列表失败')
 		}
 	}
 
-	_btnClick = (code)=>{
+	_btnClick = async (code)=>{
 		const {selectedRowKeys} = this.state
 		if((code === SETTING || code === AUTH) && selectedRowKeys.length === 0 ){
 			message.info('请选择一个角色')
@@ -88,6 +92,7 @@ class CurrentPage extends Component{
 				break
 			case AUTH:
 				curTitle = '用户授权'
+				await this._requestUserList()
 				break
 			default:
 				break
@@ -96,6 +101,57 @@ class CurrentPage extends Component{
 			modalTitle: curTitle,
 			modalVisible: true,
 			modalType: code
+		})
+	}
+
+	_requestUserList = async ()=>{
+		try{
+			const {selectedRowKeys} = this.state
+			let curId = (_.isArray(selectedRowKeys) && selectedRowKeys.length > 0) ? selectedRowKeys[0] : null
+			const ret = await axiosApi.ajax({
+				url: 'role/userList',
+				data: {
+					isShowLoading: true,
+					params: {
+						role_id: curId
+					}
+				}
+			})
+			if(ret && _.isArray(ret.list) && ret.list.length > 0){
+				this.curUserList = ret.list
+				const {mockData, targetKeys} = this._filterUserList(ret.list)
+				this.setState({
+					curMockData: mockData,
+					curTargetKeys: targetKeys,
+				})
+			}
+		}catch(e){
+			console.log('_requestUserList e=>', e)
+			message.error('请求角色用户列表失败')
+		}
+	}
+	// 筛选目标用户
+	_filterUserList = (sourcelist)=>{
+		let mockData = [], targetKeys = []
+		sourcelist.forEach((item)=>{
+			let dataItem = {
+				key: item.user_id,
+				title: item.user_name,
+			}
+			if(item.status === 1){
+				targetKeys.push(dataItem)
+			} else {
+				mockData.push(dataItem)
+			}
+		})
+		return {
+			mockData,
+			targetKeys,
+		}
+	}
+	_transferHandleChange = (targetKeys)=>{
+		this.setState({
+			curTargetKeys: targetKeys
 		})
 	}
 
@@ -182,6 +238,7 @@ class CurrentPage extends Component{
 		const { 
 			list, pagination, selectedRowKeys, selectedItems,
 			modalTitle, modalVisible, modalType,
+			curMockData, curSelectedKeys, curTargetKeys,
 		} = this.state
 		let curData = (_.isArray(selectedItems) && selectedItems.length > 0) ? selectedItems[0] : null
 		return (
@@ -213,11 +270,17 @@ class CurrentPage extends Component{
 					onOk={this._modalSubmit}
 				>
 					<HandleFormComponent 
-						currentData={modalType === SETTING ? curData : null}
-						editRoleName={modalType === SETTING}
+						currentData={modalType !== CREATE ? curData : null}
+						editRoleName={modalType === CREATE}
+						showStatus={modalType !== AUTH}
 						showTree={modalType === SETTING}
+						showTransfer={modalType === AUTH}
+						transferSources={curMockData}
+						transferTargets={curTargetKeys}
+						transferSelects={curSelectedKeys}
 						wrappedComponentRef={(form)=> this.modelForm = form}
 						updateCheckKeys={this._updateCheckKeys}
+						transferHandleChange={this._transferHandleChange}
 					/>
 				</Modal>
 			</div>

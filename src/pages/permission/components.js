@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import {Form, Input, Select, Tree} from 'antd'
+import {Form, Input, Select, Tree, Transfer} from 'antd'
 import _ from 'lodash'
 
 // config
@@ -35,8 +35,21 @@ class FormComponent extends Component{
 		updateCheckKeys(checkedKeys)
 	}
 
+	// transfer
+	_transferChange = (nextTargetKeys)=>{
+		const { transferHandleChange } = this.props
+		transferHandleChange(nextTargetKeys)
+	}
+	_transferFilterOption = (inputValue, option) => {
+    return option.title.indexOf(inputValue) > -1;
+  }
+
 	render(){
-		const { editRoleName, currentData, showTree } = this.props
+		const { 
+			editRoleName, currentData, showTree, showStatus,
+			showTransfer, transferSources, transferTargets,
+		} = this.props
+		console.log('formComponent props=>', this.props)
 		const {getFieldDecorator} = this.props.form
 		const formItemLayout = {
 			labelCol: {
@@ -58,23 +71,27 @@ class FormComponent extends Component{
 							}]
 						})(
 							<Input type="text" placeholder="请输入角色名称"
-								disabled={editRoleName}
+								disabled={!editRoleName}
 							/>
 						) 
 					}
 				</FormItem>
-				<FormItem label="状态" {...formItemLayout}>
-					{
-						getFieldDecorator('status', {
-							initialValue: currentData && currentData.status ? currentData.status : 1,
-						})(
-							<Select>
-								<SelectOption value={0}>停用</SelectOption>
-								<SelectOption value={1}>启用</SelectOption>
-							</Select>
-						)
-					}
-				</FormItem>
+				{
+					showStatus ? (
+						<FormItem label="状态" {...formItemLayout}>
+							{
+								getFieldDecorator('status', {
+									initialValue: currentData && currentData.status ? currentData.status : 1,
+								})(
+									<Select>
+										<SelectOption value={0}>停用</SelectOption>
+										<SelectOption value={1}>启用</SelectOption>
+									</Select>
+								)
+							}
+						</FormItem>
+					) : null
+				}
 				{
 					showTree ? (
 						<Tree 
@@ -89,6 +106,20 @@ class FormComponent extends Component{
 						</Tree>
 					) : null
 				}
+				{
+					showTransfer ? ( 
+						<Transfer 
+							dataSource={transferSources}
+							showSearch
+							searchPlaceholder="输入用户名"
+							titles={['待选用户', '已选用户']}
+							targetKeys={transferTargets}
+							onChange={this._transferChange}
+							filterOption={this._transferFilterOption}
+							render={item => item.title}
+						/>
+					) : null
+				}
 			</Form>
 		)
 	}
@@ -98,16 +129,26 @@ FormComponent.propTypes = {
 	currentData: PropTypes.object,
 	editRoleName: PropTypes.bool,
 	showTree: PropTypes.bool,
+	showStatus: PropTypes.bool,
+	showTransfer: PropTypes.bool,
+	transferSources: PropTypes.array,
+	transferTargets: PropTypes.array,
 	form: PropTypes.object,
 	updateCheckKeys: PropTypes.func,
+	transferHandleChange: PropTypes.func,
 }
 
 FormComponent.defaultProps = {
 	currentData: null,
 	editRoleName: false,
 	showTree: false,
+	showStatus: false,
+	showTransfer: false,
+	transferSources: [],
+	transferTargets: [],
 	form: null,
 	updateCheckKeys: ()=> null,
+	transferHandleChange: ()=> null,
 }
 
 const HandleFormComponent = Form.create()(FormComponent)

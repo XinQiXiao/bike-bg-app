@@ -445,3 +445,8 @@
 			"/" 访问首页 通过 Redirect重定向
 
 		t0.14.6 用户授权1
+			涉及组件：穿梭框组件
+			1.mock 增加 role/userList 接口
+			2. 用户授权 btn 交互， 请求角色用户接口， 准备 Transfer 组件 mockData 和 targetKeys 数据
+
+		t0.14.7 用户授权2
