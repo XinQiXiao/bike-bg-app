@@ -450,3 +450,13 @@
 			2. 用户授权 btn 交互， 请求角色用户接口， 准备 Transfer 组件 mockData 和 targetKeys 数据
 
 		t0.14.7 用户授权2
+			1.纠正 mockData 和 targetKeys用错的bug; 
+			2.将 Transfer 用 FormItem 包裹, 调整 transfer 在FormItem 中样式
+			3. Transfer onChange 事件
+			4. hideModal时 transfer 有关数据重置
+			5. 处理提交数据 
+			6. 在 easyMock 添加 role/userAuth 接口
+
+	##
+
+		t0.15.1 Redux基本介绍

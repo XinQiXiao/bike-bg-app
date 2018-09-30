@@ -49,7 +49,6 @@ class FormComponent extends Component{
 			editRoleName, currentData, showTree, showStatus,
 			showTransfer, transferSources, transferTargets,
 		} = this.props
-		console.log('formComponent props=>', this.props)
 		const {getFieldDecorator} = this.props.form
 		const formItemLayout = {
 			labelCol: {
@@ -108,16 +107,19 @@ class FormComponent extends Component{
 				}
 				{
 					showTransfer ? ( 
-						<Transfer 
-							dataSource={transferSources}
-							showSearch
-							searchPlaceholder="输入用户名"
-							titles={['待选用户', '已选用户']}
-							targetKeys={transferTargets}
-							onChange={this._transferChange}
-							filterOption={this._transferFilterOption}
-							render={item => item.title}
-						/>
+						<FormItem label="选择用户" {...formItemLayout}>
+							<Transfer 
+								dataSource={transferSources}
+								showSearch
+								searchPlaceholder="输入用户名"
+								titles={['待选用户', '已选用户']}
+								targetKeys={transferTargets}
+								onChange={this._transferChange}
+								filterOption={this._transferFilterOption}
+								render={item => item.title}
+								listStyle={{width: 200, height: 400}}
+							/>
+						</FormItem>
 					) : null
 				}
 			</Form>

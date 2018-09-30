@@ -92,6 +92,12 @@ class CurrentPage extends Component{
 				break
 			case AUTH:
 				curTitle = '用户授权'
+				// 数据请求前 数据重置
+				this.curUserList = []
+				this.setState({
+					curMockData: [],
+					curTargetKeys: [],
+				})
 				await this._requestUserList()
 				break
 			default:
@@ -139,10 +145,9 @@ class CurrentPage extends Component{
 				title: item.user_name,
 			}
 			if(item.status === 1){
-				targetKeys.push(dataItem)
-			} else {
-				mockData.push(dataItem)
-			}
+				targetKeys.push(dataItem.key)
+			} 
+			mockData.push(dataItem)
 		})
 		return {
 			mockData,
@@ -165,9 +170,10 @@ class CurrentPage extends Component{
 			modalType: '',
 			modalVisible: false
 		})
+		this.modelForm = null
 	}
 	_modalSubmit = ()=>{
-		const { modalType, selectedRowKeys, selectedItems } = this.state
+		const { modalType, selectedRowKeys, selectedItems, curTargetKeys } = this.state
 		const {getFieldsValue, validateFields, resetFields} = this.modelForm.props.form
 		let modelValues = getFieldsValue()
 		validateFields((err, values)=>{
@@ -179,7 +185,13 @@ class CurrentPage extends Component{
 						menus: (_.isArray(selectedItems) && selectedItems.length>0) ? selectedItems[0].menus : [],
 						role_id: (_.isArray(selectedRowKeys) && selectedRowKeys.length>0) ? selectedRowKeys[0] : null
 					}
-				} 
+				} else if(modalType === AUTH){
+					modelValues = {
+						...modelValues,
+						user_keys: curTargetKeys,
+						role_id: (_.isArray(selectedRowKeys) && selectedRowKeys.length>0) ? selectedRowKeys[0] : null,
+					}
+				}
 				// 重置 model form
 				resetFields()
 				this._hideModal()
@@ -199,7 +211,7 @@ class CurrentPage extends Component{
 				curUrl = 'role/edit'
 				failMsg = '设置权限'
 			} else {
-				curUrl = ''
+				curUrl = 'role/userAuth'
 				failMsg = '用户授权'
 			}
 			const ret = await axiosApi.ajax({
@@ -267,6 +279,7 @@ class CurrentPage extends Component{
 				</Card>
 				<Modal title={modalTitle} visible={modalVisible}
 					onCancel={this._hideModal}
+					width={modalType === AUTH ? 800 : 600}
 					onOk={this._modalSubmit}
 				>
 					<HandleFormComponent 
