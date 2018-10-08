@@ -462,8 +462,11 @@
 		t0.15.1 Redux基本介绍
 			主要截图链接: https://www.jianshu.com/p/5eb74bea0bb3
 
-		t0.15.2 Redux项目集成
+		t0.15.2 Redux项目集成1
 			1.安装插件(redux react-redux)
 				yarn add redux react-redux --save
 			2.创建action和reducer
-				
+
+		t0.15.2 Redux项目集成2
+			1.创建store
+			2.root 组件用Provider 组件包装

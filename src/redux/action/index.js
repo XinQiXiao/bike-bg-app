@@ -6,7 +6,7 @@
  * action type
  */
 export const type = {
-	SWITCH_MENU
+	SWITCH_MENU:'ACTION_SWITCH_MENU'
 }
 
 export function switchMenu(menuName){
