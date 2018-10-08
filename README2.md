@@ -463,3 +463,7 @@
 			主要截图链接: https://www.jianshu.com/p/5eb74bea0bb3
 
 		t0.15.2 Redux项目集成
+			1.安装插件(redux react-redux)
+				yarn add redux react-redux --save
+			2.创建action和reducer
+				
