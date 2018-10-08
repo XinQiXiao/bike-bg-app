@@ -458,5 +458,8 @@
 			6. 在 easyMock 添加 role/userAuth 接口
 
 	##
-
+		redux
 		t0.15.1 Redux基本介绍
+			主要截图链接: https://www.jianshu.com/p/5eb74bea0bb3
+
+		t0.15.2 Redux项目集成
