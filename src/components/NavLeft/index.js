@@ -4,6 +4,7 @@
 import React, { Component } from 'react'
 import { Menu } from 'antd'
 import { NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 // config 
 import { MenuConfig } from '../../config'
@@ -11,23 +12,24 @@ import { MenuConfig } from '../../config'
 // style
 import './index.less'
 
+// redux action
+import { switchMenu } from '../../redux'
+
 // const 
 const SubMenu = Menu.SubMenu 
 const MenuItem = Menu.Item
 
 class NavLeftComponent extends Component{
-	constructor(props){
-		super(props)
-
-		this.state = {
-			menuTreeNode: []
-		}
+	state = {
+		menuTreeNode: [],
+		currentKey: ''
 	}
 
 	componentWillMount(){
 		const menuTreeNode = this._renderMenu(MenuConfig)
 		this.setState({
-			menuTreeNode
+			menuTreeNode,
+			currentKey: window.location.hash.replace(/#|\?.*$/g, '')
 		})
 	}
 
@@ -41,21 +43,33 @@ class NavLeftComponent extends Component{
 				)
 			}
 			return (
-				<MenuItem key={item.key}>
+				<MenuItem key={item.key} title={item.title}>
 					<NavLink to={item.key}>{item.title}</NavLink>
 				</MenuItem>
 			)
 		})
 	}
 
+	_menuClick = (item)=>{
+		const {dispatch} = this.props
+		if(item.item && item.item.props){
+			dispatch(switchMenu(item.item.props.title))
+		}
+		console.log('item=>', item)
+		this.setState({
+			currentKey: item.key
+		})
+	}
+
 	render(){
+		const { currentKey } = this.state
 		return (
 			<div >
 				<div className="logo">
 					<img src="/assets/logo-ant.svg" alt="logo-ant"/>
 					<h1>Imooc MS</h1>
 				</div>
-				<Menu theme="dark">
+				<Menu theme="dark" selectedKeys={[currentKey]} onClick={this._menuClick}>
 					{this.state.menuTreeNode}
 				</Menu>
 			</div>
@@ -63,4 +77,4 @@ class NavLeftComponent extends Component{
 	}
 }
 
-export default NavLeftComponent
+export default connect()(NavLeftComponent)

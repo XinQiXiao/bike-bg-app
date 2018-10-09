@@ -467,6 +467,11 @@
 				yarn add redux react-redux --save
 			2.创建action和reducer
 
-		t0.15.2 Redux项目集成2
+		t0.15.3 Redux项目集成2
 			1.创建store
 			2.root 组件用Provider 组件包装
+		
+		t0.15.4 Redux实践开发1
+			1. Menu selectedKeys 属性，选中的菜单, onClick 切换菜单
+			2. 添加 redux-logger 插件, 并集成
+			3. NavLeft 集成 redux

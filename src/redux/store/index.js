@@ -1,8 +1,9 @@
 /**
  * create at 10/08/18
  */
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import logger from 'redux-logger'
 
 import { reducer } from '../reducer'
 
-export default ()=>createStore(reducer)
+export default ()=>createStore(reducer, applyMiddleware(logger))
