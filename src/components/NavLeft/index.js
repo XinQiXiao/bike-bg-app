@@ -50,14 +50,13 @@ class NavLeftComponent extends Component{
 		})
 	}
 
-	_menuClick = (item)=>{
+	_menuClick = ({item, key})=>{
 		const {dispatch} = this.props
-		if(item.item && item.item.props){
-			dispatch(switchMenu(item.item.props.title))
+		if(item && item.props){
+			dispatch(switchMenu(item.props.title))
 		}
-		console.log('item=>', item)
 		this.setState({
-			currentKey: item.key
+			currentKey: key
 		})
 	}
 

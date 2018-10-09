@@ -475,3 +475,8 @@
 			1. Menu selectedKeys 属性，选中的菜单, onClick 切换菜单
 			2. 添加 redux-logger 插件, 并集成
 			3. NavLeft 集成 redux
+
+		t0.15.5 Redux实践开发2
+			1.Header组件 map store state
+
+		t0.15.6 课程总结
