@@ -38,7 +38,7 @@ class CityPage extends Component{
 		try{
 			let _this = this
 			let ret = await axiosApi.ajax({
-				url: '/open_city',
+				url: '/city/list',
 				data: {
 					params: {
 						page: this.params.page,
