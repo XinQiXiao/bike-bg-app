@@ -46,8 +46,8 @@ class CityPage extends Component{
 				}
 			})
 			let retList = []
-			if(_.isArray(ret.item_list)){
-				ret.item_list.forEach((item)=>{
+			if(_.isArray(ret.list)){
+				ret.list.forEach((item)=>{
 					item.update_time = utils.transformTime(item.update_time)
 					retList.push(item)
 				})	
